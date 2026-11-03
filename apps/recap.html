@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Session One Recap, AIE401</title>
+<title>Workshop 1 Recap, AIE401</title>
 <link rel="stylesheet" href="../assets/site.css">
 <script src="../assets/site.js"></script>
 </head>
@@ -11,14 +11,14 @@
 <main id="main" class="wrap" tabindex="-1">
   <section class="hero">
     <span class="kicker">After the session</span>
-    <h1>Session One Recap</h1>
-    <p>Flip the key ideas, test yourself, look up a term, capture your reflection and track your directed study before Session Two. Everything saves in this browser.</p>
+    <h1>Workshop 1 Recap</h1>
+    <p>Flip the key ideas, test yourself, look up a term, capture your reflection and track your directed study before Workshop 2. Everything saves in this browser.</p>
   </section>
   <div class="tabs" role="tablist" aria-label="Recap sections" id="tabs"></div>
   <div id="panel" role="tabpanel" tabindex="-1"></div>
 </main>
 <script>
-AIE.header("Session One Recap");
+AIE.header("Workshop 1 Recap");
 const CARDS = [
   ["Four families of AI", "Machine learning predicts from patterns, generative AI produces new content, adaptive systems change what a learner sees next, automation follows fixed rules."],
   ["How generative AI writes", "It predicts the most likely next piece of text, over and over. It predicts what is likely, not what is true."],
@@ -40,7 +40,7 @@ const QUIZ = [
   ["An AI tool gives you a precise statistic with a named organisation and year but no link. What should you do?", ["Use it, it is specific", "Find the original source before using it", "Round it to make it safer", "Ask the AI if it is sure"], 1, "Precise figures without a traceable source are a classic hallucination pattern. Asking the tool again is not verification."],
   ["Which of these should stay with the teacher?", ["Drafting a rubric", "Generating practice questions", "Deciding whether a learner has committed misconduct", "Rewording your own feedback"], 2, "Misconduct decisions need evidence, process and human judgement."],
   ["A colleague wants feedback on real learner essays from a free public chatbot. The best response is", ["Fine if names are removed", "Only use a tool your institution has approved for that purpose", "Fine for drafts but not final work", "Fine if the learner agrees afterwards"], 1, "Learner work is personal data and intellectual property. Approved tools only."],
-  ["AI writing detectors", ["Prove reliably that AI was used", "Are unreliable and can be unfair, so they are not proof", "Work perfectly on short texts", "Are required by law"], 1, "They produce false positives and negatives. Session Two goes deeper."],
+  ["AI writing detectors", ["Prove reliably that AI was used", "Are unreliable and can be unfair, so they are not proof", "Work perfectly on short texts", "Are required by law"], 1, "They produce false positives and negatives. Workshop 2 goes deeper."],
   ["When AI simplifies a text for a learner, the key check is", ["Is it shorter?", "Did the meaning survive?", "Does it use fewer paragraphs?", "Does it sound friendly?"], 1, "Shorter and friendlier means nothing if the meaning changed."],
   ["Which is NOT one of the four parts of AI literacy used today?", ["Understand", "Use", "Evaluate", "Automate"], 3, "Understand, use, evaluate and act responsibly."],
   ["What is the first stage of the action research cycle?", ["Reflect", "Act", "Plan", "Observe"], 2, "Plan, act, observe, reflect, then round again."]
@@ -62,16 +62,16 @@ const GLOSS = [
   ["Personal data", "Any information that relates to an identifiable person, including learner work and names."],
   ["Prompt", "The instructions and context you give an AI tool."],
   ["Reflective journal", "Your structured record of what you tried, what happened and how your thinking changed. It travels with you through the module."],
-  ["SWOT", "Strengths, weaknesses, opportunities and threats. Session Three uses a critical version."],
+  ["SWOT", "Strengths, weaknesses, opportunities and threats. Workshop 3 uses a critical version."],
   ["Token", "A small piece of text, often part of a word, that a language model reads and predicts."]
 ];
 const STUDY = [
   "Finish the baseline self assessment and upload it", "Write Entry 1 in your journal using Gibbs' cycle", "Generate and refine one teaching or professional resource",
   "Adapt one resource for accessibility or inclusion", "Note one strength and one concern about AI in your setting", "Introduce yourself in the Teams Introductions channel",
   "Post in Where AI adds value and reply to two colleagues", "Start mapping current AI use in your setting", "Read the core chapters and note one idea to test",
-  "Find your institution's AI policy or staff guidance to bring", "Choose one live assessment to bring to Session Two"
+  "Find your institution's AI policy or staff guidance to bring", "Choose one live assessment to bring to Workshop 2"
 ];
-const TABS = [["cards", "Flashcards"], ["quiz", "Knowledge check"], ["gloss", "Glossary"], ["refl", "3, 2, 1 reflection"], ["study", "Before Session Two"], ["me", "My progress"]];
+const TABS = [["cards", "Flashcards"], ["quiz", "Knowledge check"], ["gloss", "Glossary"], ["refl", "3, 2, 1 reflection"], ["study", "Before Workshop 2"], ["me", "My progress"]];
 let cur = AIE.get("rc-tab", "cards");
 const tabs = document.getElementById("tabs"), panel = document.getElementById("panel");
 function renderTabs() { tabs.innerHTML = TABS.map(t => `<button class="tab" role="tab" aria-selected="${t[0] === cur}" data-t="${t[0]}" id="tb-${t[0]}">${t[1]}</button>`).join(""); tabs.querySelectorAll(".tab").forEach(b => b.onclick = () => { cur = b.dataset.t; AIE.set("rc-tab", cur); renderTabs(); render(); }); }
@@ -94,7 +94,7 @@ function quiz() {
       document.getElementById("qf").innerHTML = `<div class="fb ${ok ? "ok" : "no"}"><strong>${ok ? "Correct." : "Not quite."}</strong>${q[3]}</div><button class="btn" style="margin-top:12px" id="qn">${i + 1 < ord.length ? "Next question" : "See your result"}</button>`;
       document.getElementById("qn").onclick = () => { i++; i < ord.length ? ask() : done(); }; document.getElementById("qn").focus(); }); };
   const done = () => { const h = AIE.get("rc-quiz", []); h.unshift({ s, d: new Date().toLocaleDateString("en-GB") }); AIE.set("rc-quiz", h.slice(0, 10)); if (s >= 8) AIE.confetti();
-    panel.innerHTML = `<div class="card"><span class="pill">Result</span><div class="score">${s} / ${ord.length}</div><p><strong>${s >= 9 ? "Excellent recall of Session One." : s >= 7 ? "Solid. Flip the cards for the ones you missed." : "Worth another look at the flashcards before Session Two."}</strong></p><button class="btn" id="qa">Try again</button></div>`;
+    panel.innerHTML = `<div class="card"><span class="pill">Result</span><div class="score">${s} / ${ord.length}</div><p><strong>${s >= 9 ? "Excellent recall of Workshop 1." : s >= 7 ? "Solid. Flip the cards for the ones you missed." : "Worth another look at the flashcards before Workshop 2."}</strong></p><button class="btn" id="qa">Try again</button></div>`;
     document.getElementById("qa").onclick = quiz; };
   ask();
 }
@@ -109,13 +109,13 @@ function refl() {
   const r = AIE.get("rc-321", { a: "", b: "", c: "" });
   panel.innerHTML = `<div class="card"><p>Capture this while it is fresh. It is a good start to Entry 1 in your reflective journal.</p>
   <label class="field" for="r3">Three things I learned today</label><textarea id="r3">${AIE.esc(r.a)}</textarea>
-  <label class="field" for="r2">Two things I will try before Session Two</label><textarea id="r2">${AIE.esc(r.b)}</textarea>
+  <label class="field" for="r2">Two things I will try before Workshop 2</label><textarea id="r2">${AIE.esc(r.b)}</textarea>
   <label class="field" for="r1">One question I still have</label><textarea id="r1">${AIE.esc(r.c)}</textarea>
   <div class="row" style="margin-top:14px"><button class="btn" id="rdl">Download as a text file</button><button class="btn ghost" id="rcp">Copy</button><span class="small muted">Saves as you type.</span></div></div>`;
   const ids = ["r3", "r2", "r1"], save = () => AIE.set("rc-321", { a: r3.value, b: r2.value, c: r1.value });
   ids.forEach(x => document.getElementById(x).oninput = save);
-  const txt = () => `AIE401 Session One, 3, 2, 1 reflection\n\nThree things I learned\n${r3.value}\n\nTwo things I will try\n${r2.value}\n\nOne question I still have\n${r1.value}\n`;
-  document.getElementById("rdl").onclick = () => AIE.download("AIE401 Session One reflection.txt", txt());
+  const txt = () => `AIE401 Workshop 1, 3, 2, 1 reflection\n\nThree things I learned\n${r3.value}\n\nTwo things I will try\n${r2.value}\n\nOne question I still have\n${r1.value}\n`;
+  document.getElementById("rdl").onclick = () => AIE.download("AIE401 Workshop 1 reflection.txt", txt());
   document.getElementById("rcp").onclick = () => AIE.copy(txt(), "Reflection copied");
 }
 function study() {
@@ -123,14 +123,14 @@ function study() {
   const paint = () => { const n = d.length; document.getElementById("sp").style.width = (n / STUDY.length * 100) + "%"; document.getElementById("sn").textContent = `${n} of ${STUDY.length} done`; };
   panel.innerHTML = `<div class="card"><div class="row" style="justify-content:space-between"><strong>Directed study, around twelve to fifteen hours</strong><span class="badge" id="sn" aria-live="polite"></span></div><div class="bar" style="margin:12px 0"><span id="sp"></span></div>
   ${STUDY.map((s, i) => `<label class="check"><input type="checkbox" data-s="${i}" ${d.includes(i) ? "checked" : ""}><span>${s}</span></label>`).join("")}</div>`;
-  panel.querySelectorAll("[data-s]").forEach(cb => cb.onchange = () => { const i = +cb.dataset.s; const k = d.indexOf(i); if (cb.checked && k < 0) d.push(i); if (!cb.checked && k >= 0) d.splice(k, 1); AIE.set("rc-study", d); paint(); if (d.length === STUDY.length) { AIE.confetti(); AIE.toast("Ready for Session Two"); } });
+  panel.querySelectorAll("[data-s]").forEach(cb => cb.onchange = () => { const i = +cb.dataset.s; const k = d.indexOf(i); if (cb.checked && k < 0) d.push(i); if (!cb.checked && k >= 0) d.splice(k, 1); AIE.set("rc-study", d); paint(); if (d.length === STUDY.length) { AIE.confetti(); AIE.toast("Ready for Workshop 2"); } });
   paint();
 }
 function me() {
   const q = AIE.get("rc-quiz", []), st = AIE.get("rc-study", []);
   const stats = [["Knowledge check best", q.length ? Math.max(...q.map(x => x.s)) + " / 10" : "Not yet"], ["AI or Not? best", AIE.get("aion-best", null) !== null ? AIE.get("aion-best") + " / 12" : "Not yet"],
     ["Hallucination Hunter best", AIE.get("hh-best", null) !== null ? AIE.get("hh-best") + " / 12" : "Not yet"], ["Myth or Reality best", AIE.get("mr-best", null) !== null ? AIE.get("mr-best") + " / 12" : "Not yet"],
-    ["Directed study", st.length + " of " + STUDY.length], ["Prompts in your bank", AIE.get("pl-bank", []).length]];
+    ["Starting Point diagnostic", Object.keys(AIE.get("sp-answers", {})).length === 16 ? Object.values(AIE.get("sp-answers", {})).reduce((a, b) => a + b, 0) + " / 80" : "Not finished"], ["Directed study", st.length + " of " + STUDY.length], ["Prompts in your bank", AIE.get("pl-bank", []).length]];
   panel.innerHTML = `<div class="grid g3">${stats.map(s => `<div class="card"><span class="small muted">${s[0]}</span><div style="font-size:1.8rem;font-weight:800;color:var(--primary)">${s[1]}</div></div>`).join("")}</div>
   <div class="card soft" style="margin-top:16px">Your progress is stored only in this browser, on this device. Nothing is sent anywhere.</div>
   <button class="btn ghost" style="margin-top:16px" id="wipe">Clear all my saved progress</button>`;

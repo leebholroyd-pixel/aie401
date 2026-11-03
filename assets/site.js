@@ -1,4 +1,4 @@
-/* AIE401 Session One, shared behaviour: header, theme, storage, toast, copy, timer, confetti. */
+/* AIE401 Workshop 1, shared behaviour: header, theme, storage, toast, copy, timer, confetti. */
 (function () { try { var t = localStorage.getItem("aie401-theme"); if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t); } catch (e) {} })();
 
 const AIE = {
@@ -43,7 +43,7 @@ const AIE = {
   },
   header(title, sub) {
     const h = document.createElement("header"); h.className = "topbar";
-    h.innerHTML = `<a class="brand" href="${AIE.root}index.html"><span class="brand-mark" aria-hidden="true">AI</span><span class="brand-text">${title}<small>${sub || "AIE401 Artificial Intelligence for Educators, Session One"}</small></span></a>
+    h.innerHTML = `<a class="brand" href="${AIE.root}index.html"><span class="brand-mark" aria-hidden="true">AI</span><span class="brand-text">${title}<small>${sub || "AIE401 Artificial Intelligence for Educators, Workshop 1"}</small></span></a>
       <a class="top-btn hide-sm" href="${AIE.root}index.html">All resources</a>
       <button type="button" class="top-btn" id="theme-btn" aria-pressed="false">Dark mode</button>`;
     document.body.prepend(h);

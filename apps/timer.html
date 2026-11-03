@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Session Timer, AIE401 Session One</title>
+<title>Session Timer, AIE401 Workshop 1</title>
 <link rel="stylesheet" href="../assets/site.css">
 <script src="../assets/site.js"></script>
 <style>
@@ -33,7 +33,7 @@
 </main>
 <script>
 AIE.header("Session Timer");
-const P = [["Bingo icebreaker", 5], ["AI or Not? quiz", 8], ["Baseline and journal", 15], ["Prompt Relay", 22], ["Break", 10], ["Mark the Machine", 22], ["One Resource, Five Learners", 19], ["Chat waterfall", 2], ["Practice problem", 5], ["Custom 1 minute", 1]];
+const P = [["Bingo icebreaker", 5], ["AI or Not? quiz", 8], ["Starting Point and journal", 15], ["Prompt Relay", 22], ["Break", 10], ["Mark the Machine", 22], ["One Resource, Five Learners", 19], ["Chat waterfall", 2], ["Practice problem", 5], ["Custom 1 minute", 1]];
 const T = AIE.timer(document.getElementById("t"), document.getElementById("b"), () => { document.getElementById("label").textContent = "Time is up"; });
 document.getElementById("presets").innerHTML = P.map((p, i) => `<button class="btn small ${i === 4 ? "teal" : "ghost"}" data-p="${i}">${p[0]}, ${p[1]} min</button>`).join("");
 document.querySelectorAll("[data-p]").forEach(b => b.onclick = () => { const p = P[+b.dataset.p]; T.ended = false; T.set(p[1] * 60); document.getElementById("label").textContent = p[0]; });
