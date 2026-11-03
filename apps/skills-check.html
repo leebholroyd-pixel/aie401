@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Digital Skills Check, AIE401</title>
+<meta name="description" content="Initial and final check against the AI embedded Essential Digital Skills Framework (FutureDotNow with DSIT, 2025).">
+<link rel="stylesheet" href="../assets/site.css">
+<script src="../assets/site.js"></script>
+<style>
+.opt { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-top: 8px; }
+.opt button { font: inherit; font-size: .85rem; font-weight: 700; padding: 10px 6px; border-radius: 10px; border: 2px solid var(--border); background: var(--surface); color: var(--text); cursor: pointer; }
+.opt button[aria-pressed="true"][data-v="0"] { background: var(--no-soft); border-color: var(--no); }
+.opt button[aria-pressed="true"][data-v="1"] { background: var(--mid-soft); border-color: var(--mid); }
+.opt button[aria-pressed="true"][data-v="2"] { background: var(--ok-soft); border-color: var(--ok); }
+.task { padding: 14px 0; border-bottom: 1px solid var(--border); }
+.tag { font-size: .72rem; font-weight: 700; padding: 2px 8px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); margin-left: 6px; white-space: nowrap; }
+.skill { margin: 14px 0; }
+.pair { display: grid; grid-template-columns: 92px 1fr 44px; white-space: nowrap; gap: 8px; align-items: center; font-size: .85rem; margin: 4px 0; }
+.bar.b1 > span { background: var(--lteal); } .bar.b2 > span { background: linear-gradient(90deg, var(--navy), var(--cyan)); }
+.sticky { position: sticky; top: 76px; }
+@media (max-width: 860px) { .sticky { position: static; } }
+</style>
+</head>
+<body>
+<main id="main" class="wrap" tabindex="-1">
+  <section class="hero">
+    <span class="kicker">Initial check at Workshop 1, final check at the Summit</span>
+    <h1>AI Digital Skills Check</h1>
+    <p>Sixteen workplace tasks from the AI embedded Essential Digital Skills Framework, the national framework for the digital skills every worker needs. Rate yourself now, then again at the Summit, and see how far you have moved on each of the four AI skills.</p>
+  </section>
+
+  <div class="tabs" role="tablist" aria-label="Which check" id="tabs">
+    <button class="tab" role="tab" id="t-initial" data-m="initial">Initial check, Workshop 1</button>
+    <button class="tab" role="tab" id="t-final" data-m="final">Final check, the Summit</button>
+  </div>
+
+  <div class="grid" style="grid-template-columns: minmax(0, 1.6fr) minmax(280px, 1fr); gap: 22px; align-items: start" id="layout">
+    <div class="card" id="tasks"></div>
+    <div class="sticky">
+      <div class="card">
+        <h2 style="margin-top:0" id="side-h">Your four AI skills</h2>
+        <p class="small muted" id="count" aria-live="polite"></p>
+        <div id="skills"></div>
+        <div class="row" style="justify-content:space-between;margin-top:8px"><strong>Overall</strong><span class="score" style="font-size:1.6rem" id="overall">0%</span></div>
+      </div>
+      <div class="card soft" style="margin-top:16px" id="msg"></div>
+      <div class="row" style="margin-top:14px"><button class="btn" id="dl">Download my results</button><button class="btn ghost" id="reset">Clear this check</button></div>
+      <p class="small muted" style="margin-top:10px">Based on FutureDotNow with the Department for Science, Innovation and Technology (2025) <em>Embedding AI into the Essential Digital Skills Framework</em>. Statements are paraphrased, and the task numbers match the framework.</p>
+    </div>
+  </div>
+</main>
+<script>
+AIE.header("AI Digital Skills Check");
+if (innerWidth < 860) document.getElementById("layout").style.gridTemplateColumns = "1fr";
+const SK = ["AI literacy and understanding", "Effective communication with AI", "Critical evaluation of AI outputs", "Responsible and ethical use of AI"];
+const SHORT = ["Literacy", "Communication", "Evaluation", "Responsible use"];
+const T = [
+  ["Handling information and content", 1, 3, "I follow my organisation's IT policies when sharing information, including never putting sensitive data into unauthorised AI tools"],
+  ["Communicating", 4, 1, "I use workplace digital tools, including generative AI such as Copilot, appropriately to create, share and collaborate"],
+  ["Transacting", 8, 2, "I understand how AI supports online transactions and can spot risks such as AI generated scams or manipulative interfaces"],
+  ["Problem solving", 9, 2, "I find information and use appropriate tools, including authorised AI assistants, to solve work problems, and I check what they give me"],
+  ["Problem solving", 10, 0, "I use online learning, including AI learning assistants, to build my own skills"],
+  ["Problem solving", 11, 0, "I use the software my job requires, including AI powered tools where they are appropriate"],
+  ["Problem solving", 12, 1, "I improve my own or my organisation's productivity with digital tools and appropriate AI solutions"],
+  ["Problem solving", 13, 1, "I write effective prompts to solve specific work problems, treating AI as a complement to human judgement rather than a replacement"],
+  ["Staying safe, legal and responsible online", 14, 3, "I act with caution online, including when using AI tools, and avoid unauthorised AI services, deepfakes and AI powered scams"],
+  ["Staying safe, legal and responsible online", 15, 3, "I follow data protection guidelines, including consent for AI training data and not sharing copyrighted material with AI systems"],
+  ["Staying safe, legal and responsible online", 16, 2, "I recognise suspicious links and content, whether a person wrote it or AI generated it"],
+  ["Staying safe, legal and responsible online", 17, 3, "I am careful what I share online, knowing it may be used to train AI systems or shape algorithmic decisions about me"],
+  ["Staying safe, legal and responsible online", 22, 3, "I manage privacy settings for my accounts, including opting out of AI personalisation where appropriate"],
+  ["Staying safe, legal and responsible online", 23, 0, "I understand the basic principles of AI: how it works, its limitations, and when it is appropriate to use"],
+  ["Staying safe, legal and responsible online", 24, 3, "I recognise the ethical implications and societal impact of AI, such as bias, human oversight, environmental cost and fairness"],
+  ["Staying safe, legal and responsible online", 25, 3, "I understand and manage the AI risks in my own job, keep up with new tools, and follow the AI guidance for my sector"]
+];
+const OPTS = ["Not yet", "Partly", "I can do this"];
+let mode = AIE.get("sc-mode", "initial");
+const data = () => AIE.get("sc-" + mode, {});
+function tabs() { document.querySelectorAll(".tab").forEach(b => { b.setAttribute("aria-selected", b.dataset.m === mode); b.onclick = () => { mode = b.dataset.m; AIE.set("sc-mode", mode); tabs(); build(); }; }); }
+function build() {
+  const A = data(); let area = "", h = "";
+  if (mode === "final" && Object.keys(AIE.get("sc-initial", {})).length < 16) h += `<div class="fb mid" style="margin-top:0"><strong>No initial check found in this browser.</strong>You can still complete the final check, but the comparison needs your Workshop 1 answers. If you used another device, use your downloaded results or the Word version.</div>`;
+  T.forEach((t, i) => {
+    if (t[0] !== area) { area = t[0]; h += `<h2 style="margin-top:${i ? 26 : 4}px;font-size:1.15rem">${area}</h2>`; }
+    h += `<div class="task" role="group" aria-labelledby="tl-${i}"><span id="tl-${i}"><strong>${t[1]}.</strong> ${t[3]}<span class="tag">${SHORT[t[2]]}</span></span>
+      <div class="opt">${OPTS.map((o, v) => `<button type="button" data-i="${i}" data-v="${v}" aria-pressed="${A[i] === v}">${o}</button>`).join("")}</div></div>`;
+  });
+  const el = document.getElementById("tasks"); el.innerHTML = h;
+  el.querySelectorAll("[data-i]").forEach(b => b.onclick = () => { const A = data(); const i = +b.dataset.i; A[i] = +b.dataset.v; AIE.set("sc-" + mode, A);
+    el.querySelectorAll(`[data-i="${i}"]`).forEach(x => x.setAttribute("aria-pressed", +x.dataset.v === A[i])); paint(true); });
+  document.getElementById("side-h").textContent = mode === "initial" ? "Your four AI skills" : "Then and now";
+  paint();
+}
+function pct(A) { return SK.map((_, s) => { const ix = T.map((t, i) => [t, i]).filter(x => x[0][2] === s).map(x => x[1]); return Math.round(ix.reduce((a, i) => a + (A[i] || 0), 0) / (ix.length * 2) * 100); }); }
+function overall(A) { return Math.round(T.reduce((a, _, i) => a + (A[i] || 0), 0) / 32 * 100); }
+function paint(live) {
+  const A = data(), n = Object.keys(A).length, I = AIE.get("sc-initial", {}), F = AIE.get("sc-final", {});
+  document.getElementById("count").textContent = `${n} of 16 rated`;
+  const pi = pct(I), pf = pct(F), cur = pct(A);
+  document.getElementById("skills").innerHTML = SK.map((s, k) => mode === "initial"
+    ? `<div class="skill"><strong class="small">${k + 1}. ${s}</strong><div class="row" style="flex-wrap:nowrap"><div class="bar b2" style="flex:1"><span style="width:${cur[k]}%"></span></div><b style="width:44px;text-align:right">${cur[k]}%</b></div></div>`
+    : `<div class="skill"><strong class="small">${k + 1}. ${s}</strong><div class="pair"><span class="muted">Workshop 1</span><div class="bar b1"><span style="width:${pi[k]}%"></span></div><b>${pi[k]}%</b></div><div class="pair"><span>Summit</span><div class="bar b2"><span style="width:${pf[k]}%"></span></div><b>${pf[k]}%</b></div></div>`).join("");
+  document.getElementById("overall").textContent = overall(A) + "%";
+  const m = document.getElementById("msg");
+  if (n < 16) { m.innerHTML = `<strong>${mode === "initial" ? "Your starting line" : "Your progress"}</strong><p class="small" style="margin:6px 0 0">Rate all sixteen tasks to see your ${mode === "initial" ? "priorities" : "change since Workshop 1"}.</p>`; return; }
+  if (mode === "initial") {
+    const low = cur.map((v, k) => [v, k]).sort((a, b) => a[0] - b[0])[0][1];
+    m.innerHTML = `<strong>Your starting line is set</strong><p class="small" style="margin:6px 0 0">Your lowest AI skill is <strong>${SK[low]}</strong>, so give it extra attention in your directed study. Download your results and keep them in your reflective journal. You repeat this check at the Summit.</p>`;
+  } else {
+    const d = pf.map((v, k) => v - pi[k]); const best = d.map((v, k) => [v, k]).sort((a, b) => b[0] - a[0])[0][1]; const tot = overall(F) - overall(I);
+    m.innerHTML = `<strong>${tot > 0 ? "Up " + tot + " points overall" : tot === 0 ? "No overall change" : "Down " + Math.abs(tot) + " points overall"}</strong><p class="small" style="margin:6px 0 0">Your biggest change is in <strong>${SK[best]}</strong> (${d[best] >= 0 ? "+" : ""}${d[best]} points). A fall can be good news too, because it often means you now know what you did not know. Use this comparison as evidence in Task 5 of your poster.</p>`;
+  }
+  if (live && !paint["c" + mode]) { paint["c" + mode] = true; AIE.confetti(); }
+}
+document.getElementById("dl").onclick = () => {
+  const I = AIE.get("sc-initial", {}), F = AIE.get("sc-final", {}), lab = v => v === undefined ? "not rated" : OPTS[v];
+  let s = `AIE401 AI Digital Skills Check, ${new Date().toLocaleDateString("en-GB")}\nBased on FutureDotNow with DSIT (2025), Embedding AI into the Essential Digital Skills Framework\n\n`;
+  s += SK.map((k, i) => `${k}: Workshop 1 ${pct(I)[i]}%, Summit ${Object.keys(F).length ? pct(F)[i] + "%" : "not yet"}`).join("\n");
+  s += `\nOverall: Workshop 1 ${overall(I)}%, Summit ${Object.keys(F).length ? overall(F) + "%" : "not yet"}\n\n`;
+  s += T.map((t, i) => `Task ${t[1]}: ${t[3]}\n  Workshop 1: ${lab(I[i])}   Summit: ${lab(F[i])}`).join("\n");
+  AIE.download("AIE401 AI Digital Skills Check.txt", s);
+};
+document.getElementById("reset").onclick = () => { if (!confirm("Clear your answers for this check?")) return; AIE.set("sc-" + mode, {}); paint["c" + mode] = false; build(); };
+tabs(); build();
+AIE.footer();
+</script>
+</body>
+</html>
