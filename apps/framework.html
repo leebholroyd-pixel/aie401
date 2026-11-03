@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The AI Essential Digital Skills Framework, AIE401</title>
+<meta name="description" content="What the AI embedded Essential Digital Skills Framework is, its four AI skills, how AIE401 develops each one, and your initial and final Skills Check.">
+<link rel="stylesheet" href="../assets/site.css">
+<script src="../assets/site.js"></script>
+<style>
+.skillcard { display: flex; flex-direction: column; gap: 8px; }
+.skillcard .n { width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; color: #fff; font-weight: 800; font-size: 1.1rem; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { font: inherit; font-size: .85rem; font-weight: 700; padding: 6px 14px; border-radius: 999px; border: 2px solid var(--border); background: var(--surface); color: var(--text); cursor: pointer; }
+.chip[aria-pressed="true"] { background: var(--navy); color: #fff; border-color: var(--navy); }
+.task { display: grid; grid-template-columns: 46px 1fr; gap: 12px; align-items: start; padding: 14px 0; border-bottom: 1px solid var(--border); }
+.task .no { width: 40px; height: 40px; border-radius: 10px; background: var(--surface-2); display: grid; place-items: center; font-weight: 800; color: var(--primary); }
+.task details summary { cursor: pointer; font-weight: 700; color: var(--accent); margin-top: 6px; }
+.journey { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; counter-reset: j; }
+.journey .card { position: relative; padding-top: 34px; }
+.journey .card::before { counter-increment: j; content: counter(j); position: absolute; top: 12px; left: 22px; font-weight: 800; color: var(--teal); }
+.snap { display: grid; grid-template-columns: 1fr 60px; gap: 10px; align-items: center; margin: 8px 0; }
+</style>
+</head>
+<body>
+<main id="main" class="wrap" tabindex="-1">
+  <section class="hero">
+    <span class="kicker">The national framework behind your Skills Check</span>
+    <h1>The AI Essential Digital Skills Framework</h1>
+    <p>The UK's Essential Digital Skills Framework sets out the digital skills every worker needs. In 2025 FutureDotNow, working with the Department for Science, Innovation and Technology, updated it for an AI enabled workplace. AIE401 uses it to measure where you start and how far you travel.</p>
+    <div class="row" style="margin-top:18px"><a class="btn teal" href="skills-check.html">Take the Skills Check</a><a class="btn" style="background:transparent;border-color:rgba(255,255,255,.6)" href="#journey">How it works in AIE401</a></div>
+  </section>
+
+  <div class="grid g4" style="margin-top:22px">
+    <div class="card"><div class="score">25</div><strong>workplace tasks</strong><p class="small muted" style="margin:4px 0 0">in the updated framework</p></div>
+    <div class="card"><div class="score">16</div><strong>involve AI</strong><p class="small muted" style="margin:4px 0 0">eleven rewritten and five brand new</p></div>
+    <div class="card"><div class="score">5</div><strong>skill areas</strong><p class="small muted" style="margin:4px 0 0">from handling information to staying safe</p></div>
+    <div class="card"><div class="score">4</div><strong>AI skills</strong><p class="small muted" style="margin:4px 0 0">that every worker needs, in any sector</p></div>
+  </div>
+
+  <h2>The four AI skills every worker needs</h2>
+  <p class="muted">Each one is developed somewhere in AIE401. Select a skill below to see its tasks.</p>
+  <div class="grid" id="skills" style="grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr))"></div>
+
+  <h2>What the report says about education</h2>
+  <div class="grid g3">
+    <div class="card soft"><strong>How education uses AI</strong><p class="small" style="margin:6px 0 0">Mostly for content creation, summarising papers and notes, curriculum planning and administration, rather than direct teaching.</p></div>
+    <div class="card soft"><strong>The main concern</strong><p class="small" style="margin:6px 0 0">Keeping academic integrity intact while using AI to support learning.</p></div>
+    <div class="card soft"><strong>What matters most</strong><p class="small" style="margin:6px 0 0">AI literacy as a foundation, critical evaluation of outputs, and knowing when AI is appropriate and when human oversight must stay.</p></div>
+  </div>
+
+  <h2>Explore the sixteen AI tasks</h2>
+  <div class="card">
+    <div class="chips" id="filters" role="group" aria-label="Filter by AI skill"></div>
+    <p class="small muted" id="fcount" aria-live="polite" style="margin:12px 0 0"></p>
+    <div id="tasks"></div>
+  </div>
+
+  <h2>Which AI skill is it?</h2>
+  <div class="card" id="quiz" aria-live="polite"></div>
+
+  <h2 id="journey">How it works in AIE401</h2>
+  <div class="journey">
+    <div class="card"><strong>Workshop 1</strong><p class="small" style="margin:6px 0 0">Take the initial Skills Check at 14:25. It sets your starting line on each AI skill.</p></div>
+    <div class="card"><strong>Between workshops</strong><p class="small" style="margin:6px 0 0">Focus your directed study on your lowest AI skill. Log what you try in your journal.</p></div>
+    <div class="card"><strong>Workshops 2 to 4</strong><p class="small" style="margin:6px 0 0">Ethics, the Critical SWOT Reflection and your action research build the skills further.</p></div>
+    <div class="card"><strong>The Summit</strong><p class="small" style="margin:6px 0 0">Take the final check. The comparison becomes evidence in Task 5 of your poster.</p></div>
+  </div>
+  <div class="card accent" style="margin-top:16px" id="snapshot"></div>
+
+  <h2>Where AIE401 develops each skill</h2>
+  <div class="card" style="overflow-x:auto">
+    <table class="tbl">
+      <thead><tr><th>AI skill</th><th>Learning outcomes</th><th>In the workshops</th><th>On this site</th></tr></thead>
+      <tbody>
+        <tr><td><strong>1. AI literacy and understanding</strong></td><td>LO1</td><td>Workshop 1 foundations, AI literacy</td><td><a href="ai-or-not.html">AI or Not?</a>, <a href="myth-or-reality.html">Myth or Reality?</a></td></tr>
+        <tr><td><strong>2. Effective communication with AI</strong></td><td>LO2, LO3</td><td>Breakout one, Prompt Relay</td><td><a href="prompt-lab.html">Prompt Lab</a></td></tr>
+        <tr><td><strong>3. Critical evaluation of AI outputs</strong></td><td>LO3, LO5</td><td>Breakout two, Mark the Machine, and the Workshop 3 Critical SWOT Reflection</td><td><a href="hallucination-hunter.html">Hallucination Hunter</a></td></tr>
+        <tr><td><strong>4. Responsible and ethical use of AI</strong></td><td>LO4</td><td>Breakout three, Workshop 2 on ethics, integrity and policy</td><td><a href="traffic-lights.html">Traffic Light Sort</a></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card soft" style="margin-top:22px">
+    <strong>Source.</strong> FutureDotNow with the Department for Science, Innovation and Technology (2025) <em>Embedding AI into the Essential Digital Skills Framework: evidence based recommendations to reflect the realities of an AI enabled workplace</em>. Task statements on this site are paraphrased, and task numbers match the framework. More at <a href="https://www.futuredotnow.uk" target="_blank" rel="noopener">futuredotnow.uk</a>.
+  </div>
+</main>
+<script>
+AIE.header("The AI Essential Digital Skills Framework");
+const SK = [
+  ["AI literacy and understanding", "Knowing what AI is, how it works, what it can and cannot do, and when it is suitable for a task.", "#57b29f"],
+  ["Effective communication with AI", "Writing clear instructions, refining outputs through iterative prompting, and adapting how you ask for different tools.", "#008da5"],
+  ["Critical evaluation of AI outputs", "Checking AI content for mistakes, hallucinations and bias, and knowing when a human must verify it.", "#004451"],
+  ["Responsible and ethical use of AI", "Data privacy, environmental impact, bias and the wider consequences of using AI.", "#003e66"]
+];
+const T = [
+  ["Handling information and content", 1, 3, "I follow my organisation's IT policies when sharing information, including never putting sensitive data into unauthorised AI tools", "Not pasting learner records into a free chatbot to help write a report."],
+  ["Communicating", 4, 1, "I use workplace digital tools, including generative AI such as Copilot, appropriately to create, share and collaborate", "Using Copilot in Teams to draft a meeting summary, then checking it before you send it."],
+  ["Transacting", 8, 2, "I understand how AI supports online transactions and can spot risks such as AI generated scams or manipulative interfaces", "Spotting a convincing fake invoice or an AI cloned voice asking the college office to pay a supplier."],
+  ["Problem solving", 9, 2, "I find information and use appropriate tools, including authorised AI assistants, to solve work problems, and I check what they give me", "Using an approved AI assistant to find research on feedback, then checking every source exists."],
+  ["Problem solving", 10, 0, "I use online learning, including AI learning assistants, to build my own skills", "Asking an AI tutor to teach you a new spreadsheet function for your markbook."],
+  ["Problem solving", 11, 0, "I use the software my job requires, including AI powered tools where they are appropriate", "Using the AI features in your VLE or office software, where your college allows them."],
+  ["Problem solving", 12, 1, "I improve my own or my organisation's productivity with digital tools and appropriate AI solutions", "Automating routine admin such as meeting notes, so more of your time goes on teaching."],
+  ["Problem solving", 13, 1, "I write effective prompts to solve specific work problems, treating AI as a complement to human judgement rather than a replacement", "The Prompt Relay: describing your learners, the task and the format, then refining the result."],
+  ["Staying safe, legal and responsible online", 14, 3, "I act with caution online, including when using AI tools, and avoid unauthorised AI services, deepfakes and AI powered scams", "Choosing the college approved tool over a free app you found online, and recognising deepfake video."],
+  ["Staying safe, legal and responsible online", 15, 3, "I follow data protection guidelines, including consent for AI training data and not sharing copyrighted material with AI systems", "Not uploading a textbook chapter, or a learner's essay, into an AI tool."],
+  ["Staying safe, legal and responsible online", 16, 2, "I recognise suspicious links and content, whether a person wrote it or AI generated it", "Spotting an AI written phishing email, like the text in Breakout three."],
+  ["Staying safe, legal and responsible online", 17, 3, "I am careful what I share online, knowing it may be used to train AI systems or shape algorithmic decisions about me", "Thinking twice before posting classroom photos or opinions publicly."],
+  ["Staying safe, legal and responsible online", 22, 3, "I manage privacy settings for my accounts, including opting out of AI personalisation where appropriate", "Switching off the option for your chats to be used to train a model, where a tool offers it."],
+  ["Staying safe, legal and responsible online", 23, 0, "I understand the basic principles of AI: how it works, its limitations, and when it is appropriate to use", "Explaining to a colleague that generative AI predicts likely text rather than looking facts up."],
+  ["Staying safe, legal and responsible online", 24, 3, "I recognise the ethical implications and societal impact of AI, such as bias, human oversight, environmental cost and fairness", "Noticing that AI generated examples all feature the same kinds of names and lives, and fixing it."],
+  ["Staying safe, legal and responsible online", 25, 3, "I understand and manage the AI risks in my own job, keep up with new tools, and follow the AI guidance for my sector", "Knowing your college's AI policy and keeping up with sector guidance, the focus of Workshop 2."]
+];
+let filt = -1;
+function skills() {
+  document.getElementById("skills").innerHTML = SK.map((s, i) => { const n = T.filter(t => t[2] === i).length;
+    return `<div class="card skillcard"><div class="row"><span class="n" style="background:${s[2]}">${i + 1}</span><h3 style="margin:0;color:var(--primary)">${s[0]}</h3></div><p style="margin:0">${s[1]}</p><button class="btn small ghost" style="align-self:flex-start" data-show="${i}">See its ${n} tasks</button></div>`; }).join("");
+  document.querySelectorAll("[data-show]").forEach(b => b.onclick = () => { filt = +b.dataset.show; tasks(); document.getElementById("filters").scrollIntoView({ behavior: "smooth", block: "center" }); });
+}
+function tasks() {
+  document.getElementById("filters").innerHTML = [`<button class="chip" data-f="-1" aria-pressed="${filt === -1}">All sixteen</button>`].concat(SK.map((s, i) => `<button class="chip" data-f="${i}" aria-pressed="${filt === i}">${i + 1}. ${s[0]}</button>`)).join("");
+  document.querySelectorAll("[data-f]").forEach(b => b.onclick = () => { filt = +b.dataset.f; tasks(); });
+  const list = T.filter(t => filt < 0 || t[2] === filt);
+  document.getElementById("fcount").textContent = `Showing ${list.length} of 16 tasks`;
+  let area = "", h = "";
+  list.forEach(t => { if (t[0] !== area) { area = t[0]; h += `<h3 style="margin:18px 0 0;color:var(--accent)">${area}</h3>`; }
+    h += `<div class="task"><span class="no" aria-label="Task ${t[1]}">${t[1]}</span><div>${t[3]} <span class="badge">${SK[t[2]][0]}</span><details><summary>What this looks like for an educator</summary><p class="small" style="margin:6px 0 0">${t[4]}</p></details></div></div>`; });
+  document.getElementById("tasks").innerHTML = h;
+}
+const Q = [
+  ["A colleague asks why the chatbot invented a reference. You explain that it predicts likely text rather than retrieving facts.", 0],
+  ["You rewrite a prompt three times, adding your learners' level and the format you need, until the resource is usable.", 1],
+  ["Before sharing an AI generated quiz, you check every answer key and find two errors.", 2],
+  ["You refuse to paste a learner's essay into a free chatbot, even though it would save time.", 3],
+  ["You notice the AI generated case studies all feature the same kind of family and ask for more varied examples.", 3],
+  ["You ask the tool to act as an experienced teacher and to return six questions at three levels.", 1],
+  ["You spot that a fluent AI summary of a policy has quietly reversed one of its conclusions.", 2],
+  ["You choose the right tool for the job, knowing an image generator is no help for checking a calculation.", 0]
+];
+let qi = 0, qs = 0, qo;
+function qask() { const q = qo[qi]; const el = document.getElementById("quiz");
+  el.innerHTML = `<div class="row" style="justify-content:space-between"><span class="pill">Scenario ${qi + 1} of ${qo.length}</span><span class="badge">Score ${qs}</span></div><p style="font-size:1.15rem;font-weight:700;margin:14px 0">${q[0]}</p>${SK.map((s, k) => `<button class="choice" data-k="${k}">${k + 1}. ${s[0]}</button>`).join("")}<div id="qf"></div>`;
+  el.querySelectorAll(".choice").forEach(b => b.onclick = () => { const k = +b.dataset.k, ok = k === q[1]; if (ok) qs++;
+    el.querySelectorAll(".choice").forEach(x => { x.disabled = true; if (+x.dataset.k === q[1]) x.classList.add("right"); else if (x === b) x.classList.add("wrong"); });
+    document.getElementById("qf").innerHTML = `<div class="fb ${ok ? "ok" : "no"}"><strong>${ok ? "Yes." : "Not quite."}</strong>This is mainly ${SK[q[1]][0].toLowerCase()}. ${SK[q[1]][1]}</div><button class="btn" style="margin-top:12px" id="qn">${qi + 1 < qo.length ? "Next scenario" : "Finish"}</button>`;
+    document.getElementById("qn").onclick = () => { qi++; qi < qo.length ? qask() : qend(); }; document.getElementById("qn").focus(); }); }
+function qend() { if (qs >= 7) AIE.confetti(); document.getElementById("quiz").innerHTML = `<span class="pill">Finished</span><div class="score">${qs} / ${qo.length}</div><p><strong>${qs >= 7 ? "You know the four skills well. Now see how you rate yourself on them." : "The skills overlap in real life, which is why the framework names all four."}</strong></p><div class="row"><a class="btn teal" href="skills-check.html">Take the Skills Check</a><button class="btn ghost" id="qa">Try again</button></div>`; document.getElementById("qa").onclick = qstart; }
+function qstart() { qi = 0; qs = 0; qo = AIE.shuffle(Q); qask(); }
+function snapshot() {
+  const I = AIE.get("sc-initial", {}), F = AIE.get("sc-final", {}), el = document.getElementById("snapshot");
+  const pct = A => SK.map((_, s) => { const ix = T.map((t, i) => [t, i]).filter(x => x[0][2] === s).map(x => x[1]); return Math.round(ix.reduce((a, i) => a + (A[i] || 0), 0) / (ix.length * 2) * 100); });
+  if (Object.keys(I).length < 16) { el.innerHTML = `<strong>Your snapshot</strong><p class="small" style="margin:6px 0 10px">Once you have taken the initial Skills Check in this browser, your four AI skill scores appear here.</p><a class="btn small" href="skills-check.html">Take the initial check</a>`; return; }
+  const pi = pct(I), pf = Object.keys(F).length === 16 ? pct(F) : null;
+  el.innerHTML = `<strong>Your snapshot</strong>` + SK.map((s, k) => `<div class="snap"><div><span class="small"><strong>${s[0]}</strong></span><div class="bar"><span style="width:${(pf || pi)[k]}%"></span></div></div><b>${pf ? (pf[k] - pi[k] >= 0 ? "+" : "") + (pf[k] - pi[k]) : pi[k] + "%"}</b></div>`).join("") + `<p class="small" style="margin:8px 0 0">${pf ? "Change since Workshop 1, in points." : "Your Workshop 1 starting line. Take the final check at the Summit to see your change."}</p>`;
+}
+skills(); tasks(); qstart(); snapshot();
+AIE.footer();
+</script>
+</body>
+</html>
