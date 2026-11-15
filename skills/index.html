@@ -70,6 +70,18 @@ input[type=text], input[type=email] { width: 100%; font: inherit; padding: 10px 
 .logos { display: flex; align-items: center; justify-content: space-between; gap: 18px; flex-wrap: wrap; border-top: 1px solid var(--line); padding: 18px 0 26px; margin-top: 10px; }
 .logos img { height: 44px; width: auto; }
 .print-only { display: none; }
+.rings { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; text-align: center; margin-bottom: 10px; }
+.rg h3 { color: var(--navy); margin: 10px 0 0; font-size: 1rem; }
+.rg p { margin: 2px 0 0; }
+.rg .big { margin: 0 auto; width: 150px; height: 150px; }
+.rg .big b { font-size: 2.1rem; }
+.conf-c { background: var(--mint); }
+.tagai { font-size: .7rem; font-weight: 800; background: var(--navy); color: #fff; border-radius: 999px; padding: 2px 8px; margin-left: 6px; vertical-align: middle; }
+details.all { margin-top: 12px; }
+details.all summary { cursor: pointer; font-weight: 700; color: var(--cyan); }
+details.all ul { columns: 2; font-size: .85rem; padding-left: 20px; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 6px 0 4px; }
+.chip { font-size: .75rem; font-weight: 700; background: var(--mint); color: var(--dteal); border-radius: 999px; padding: 3px 10px; }
 textarea { width: 100%; font: inherit; padding: 10px 12px; border: 2px solid var(--navy); border-radius: 10px; resize: vertical; }
 .q { margin: 14px 0; }
 .conf { grid-template-columns: repeat(5, 1fr); }
@@ -78,7 +90,7 @@ textarea { width: 100%; font: inherit; padding: 10px 12px; border: 2px solid var
 .ans p { margin: 0; white-space: pre-wrap; }
 .meta { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 6px 18px; font-size: .9rem; }
 .meta b { color: var(--navy); display: block; font-size: .78rem; text-transform: uppercase; letter-spacing: .06em; }
-@media (max-width: 680px) { .res-top, .cols { grid-template-columns: 1fr; } .opts, .scale { grid-template-columns: 1fr; } .big { margin: 0 auto; } }
+@media (max-width: 680px) { .rings { grid-template-columns: 1fr; } .res-top, .cols { grid-template-columns: 1fr; } .opts, .scale { grid-template-columns: 1fr; } .big { margin: 0 auto; } }
 @media print {
   @page { size: A4; margin: 12mm; }
   body { background: #fff; font-size: 10pt; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
@@ -93,6 +105,7 @@ textarea { width: 100%; font: inherit; padding: 10px 12px; border: 2px solid var
   .cols li { font-size: 8.5pt; margin: 2px 0; }
   .bars .b { margin: 4px 0; }
   .res-top { grid-template-columns: 160px 1fr; }
+  .rg .big { width: 110px; height: 110px; } .rg .big b { font-size: 1.5rem; }
 }
 </style>
 </head>
@@ -101,7 +114,7 @@ textarea { width: 100%; font: inherit; padding: 10px 12px; border: 2px solid var
   <div class="wrap">
     <div class="kick">AIE401 Artificial Intelligence for Educators</div>
     <h1>Initial AI Skills Assessment</h1>
-    <p>Twenty five workplace tasks from the AI embedded Essential Digital Skills Framework. Rate yourself honestly, see your results, then print them or email them to your tutor.</p>
+    <p>Twenty five workplace tasks from the AI embedded Essential Digital Skills Framework. Rate yourself honestly, then see your digital skills and AI skills scores, and print or download your results.</p>
   </div>
 </header>
 
@@ -122,7 +135,7 @@ textarea { width: 100%; font: inherit; padding: 10px 12px; border: 2px solid var
       <div><b>With help</b>I can do this with some support</div>
       <div><b>On my own</b>I can do this confidently and independently</div>
     </div>
-    <p class="small" style="margin-top:12px">Your answers stay in this browser. Nothing is sent anywhere unless you choose to email your results.</p>
+    <p class="small" style="margin-top:12px">Your answers stay in this browser. Nothing is sent anywhere.</p>
   </section>
 
   <div id="form"></div>
@@ -143,32 +156,31 @@ textarea { width: 100%; font: inherit; padding: 10px 12px; border: 2px solid var
     <div class="card"><h2>About you</h2><div class="meta" id="meta"></div></div>
     <div class="card">
       <h2>Your starting point</h2>
-      <div class="res-top">
-        <div class="big" id="ring"><div><b id="ov">0%</b><span id="lvl"></span></div></div>
-        <div class="bars" id="bars"></div>
+      <div class="rings">
+        <div class="rg"><div class="big" id="ring1"><div><b id="ov1">0%</b><span id="lvl1"></span></div></div><h3>Essential digital skills</h3><p class="small">20 everyday digital tasks for work</p></div>
+        <div class="rg"><div class="big" id="ring2"><div><b id="ov2">0%</b><span id="lvl2"></span></div></div><h3>AI skills</h3><p class="small">5 tasks on using AI well and responsibly</p></div>
+        <div class="rg"><div class="big conf-c"><div><b id="cf">0</b><span>out of 5</span></div></div><h3>Confidence with AI</h3><p class="small">How you rated yourself</p></div>
       </div>
+      <div class="bars" id="bars"></div>
     </div>
     <div class="card flow">
       <div class="cols">
-        <div class="box-ok"><h3>Your strengths</h3><ul id="str"></ul></div>
-        <div class="box-dev"><h3>Your priorities to develop</h3><ul id="dev"></ul></div>
+        <div class="box-ok"><h3>What you can already do</h3><ul id="str"></ul></div>
+        <div class="box-dev"><h3>Where to focus next</h3><ul id="dev"></ul></div>
       </div>
+      <details class="all no-print"><summary>See all 25 of your ratings</summary><ul id="all"></ul></details>
       <p class="small" style="margin-bottom:0;margin-top:14px">Keep these results. You will repeat this assessment at the AI for Educators Summit and compare, and you can draw on it in the professional reflection on your poster.</p>
     </div>
-    <div class="card flow"><h2>Your thoughts</h2><div class="ans" id="ans"></div></div>
+    <div class="card flow"><h2>Your thoughts, linked to the framework</h2><p class="small" style="margin-top:0">Where your answers touch on tasks in the framework, they are linked below, so you can see how your own priorities connect to it.</p><div class="ans" id="ans"></div></div>
     <div class="card no-print">
-      <h2>Save and send</h2>
-      <div class="fields" style="margin-bottom:14px">
-        <div><label for="to">Send to</label><input type="email" id="to" value="lee.holroyd@blackpool.ac.uk"></div>
-      </div>
+      <h2>Save your results</h2>
       <div class="row">
         <button class="btn" id="print">Print or save as PDF</button>
-        <button class="btn alt" id="mail">Email my results</button>
         <button class="btn ghost" id="file">Download as a file</button>
         <button class="btn ghost" id="edit">Change my answers</button>
         <button class="btn ghost" id="reset">Start again</button>
       </div>
-      <p class="small">To download a PDF, choose Print or save as PDF, then pick Save as PDF as the printer. Download as a file saves a plain text copy. Email opens your own email app with your results written in.</p>
+      <p class="small">To download a PDF, choose Print or save as PDF, then pick Save as PDF as the printer. Download as a file saves a plain text copy.</p>
     </div>
   </section>
 
@@ -234,7 +246,7 @@ function build() {
     html += `<section class="card"><div class="area-h"><h2>${a[0]}</h2><span class="pill">${a[1].length} tasks</span></div>`;
     a[1].forEach(t => {
       n++; const i = n - 1;
-      html += `<div class="task" role="group" aria-labelledby="q${i}"><p id="q${i}"><span class="n">${n}.</span><strong>${t[0]}</strong><br><span class="eg">For example: ${t[1]}</span></p><div class="opts">` +
+      html += `<div class="task" role="group" aria-labelledby="q${i}"><p id="q${i}"><span class="n">${n}.</span><strong>${t[0]}</strong>${[11, 12, 22, 23, 24].includes(i) ? '<span class="tagai">AI</span>' : ""}<br><span class="eg">For example: ${t[1]}</span></p><div class="opts">` +
         LABELS.map((l, v) => `<button type="button" data-i="${i}" data-v="${v}" aria-pressed="${A[i] === v}">${l}</button>`).join("") + `</div></div>`;
     });
     html += `</section>`;
@@ -251,29 +263,44 @@ function count() {
   $("count").textContent = n + " of 25"; $("fill").style.width = (n / 25 * 100) + "%"; $("go").disabled = $("go2").disabled = n < 25;
   $("left").textContent = n < 25 ? (25 - n) + " tasks still to rate above" : "";
 }
+const AI = [11, 12, 22, 23, 24];
+const DIG = TASKS.map((_, i) => i).filter(i => !AI.includes(i));
 function areaPct(ai) { const ix = TASKS.map((t, i) => [t, i]).filter(x => x[0].area === ai).map(x => x[1]); return Math.round(ix.reduce((s, i) => s + A[i], 0) / (ix.length * 2) * 100); }
-function overall() { return Math.round(TASKS.reduce((s, _, i) => s + A[i], 0) / 50 * 100); }
+function pctOf(ix) { return Math.round(ix.reduce((s, i) => s + A[i], 0) / (ix.length * 2) * 100); }
 function level(p) { return p >= 80 ? "Confident" : p >= 55 ? "Developing" : p >= 30 ? "Emerging" : "Starting out"; }
+const LINKS = [[/privacy|data|gdpr|personal|confidential|consent/i, [14, 0]], [/bias|fair|ethic|equity|equal|inclusi|environment/i, [23]],
+  [/cheat|plagiar|integrity|misconduct|honest|copy/i, [23, 24]], [/accura|wrong|hallucin|trust|reliab|fake|misinform|false/i, [22, 15]],
+  [/prompt/i, [12]], [/time|workload|efficien|productiv|admin|marking|planning|resource|lesson/i, [11, 10]],
+  [/risk|safe|secur|scam|phish|deepfake/i, [13, 24]], [/learn|skill|train|cpd|confiden|understand|knowledge|upskill/i, [9, 22]],
+  [/policy|guidance|governance|rule/i, [0, 24]], [/collaborat|share|team|colleague/i, [3]], [/job|replace|deskill|future/i, [24]]];
+function linked(text) { const out = []; LINKS.forEach(l => { if (l[0].test(text)) l[1].forEach(i => { if (!out.includes(i)) out.push(i); }); }); return out.slice(0, 4); }
+function ring(id, p, col) { $(id).style.background = `conic-gradient(${col} 0 ${p}%, var(--mint) ${p}% 100%)`; $(id).firstElementChild.style.cssText = "background:#fff;width:76%;height:76%;border-radius:50%;display:grid;place-content:center"; }
+function overall() { return pctOf(TASKS.map((_, i) => i)); }
 function results() {
-  const ov = overall();
-  $("ov").textContent = ov + "%"; $("lvl").textContent = level(ov);
-  $("ring").style.background = `conic-gradient(var(--teal) 0 ${ov}%, var(--mint) ${ov}% 100%)`;
-  $("ring").firstElementChild.style.cssText = "background:#fff;width:76%;height:76%;border-radius:50%;display:grid;place-content:center";
+  const d1 = pctOf(DIG), d2 = pctOf(AI);
+  $("ov1").textContent = d1 + "%"; $("lvl1").textContent = level(d1); ring("ring1", d1, "var(--teal)");
+  $("ov2").textContent = d2 + "%"; $("lvl2").textContent = level(d2); ring("ring2", d2, "var(--cyan)");
+  $("cf").textContent = conf || "\u2013";
   $("bars").innerHTML = AREAS.map((a, ai) => { const p = areaPct(ai); return `<div><div class="lab">${a[0]}</div><div class="b"><div class="track"><span style="width:${p}%"></span></div><div class="pc">${p}%</div></div></div>`; }).join("");
-  const s = TASKS.map((t, i) => [t, i]).filter(x => A[x[1]] === 2), d = TASKS.map((t, i) => [t, i]).filter(x => A[x[1]] < 2).sort((x, y) => A[x[1]] - A[y[1]]);
-  $("str").innerHTML = s.length ? s.map(x => `<li>${x[1] + 1}. ${x[0].text}</li>`).join("") : "<li>Nothing rated On my own yet, and that is fine. This is your starting point.</li>";
-  $("dev").innerHTML = d.length ? d.map(x => `<li>${x[1] + 1}. ${x[0].text} <em>(${LABELS[A[x[1]]]})</em></li>`).join("") : "<li>Every task rated On my own. Focus on helping colleagues and learners build these skills.</li>";
+  const idx = TASKS.map((_, i) => i);
+  const st = idx.filter(i => A[i] === 2);
+  const focus = idx.filter(i => A[i] < 2).sort((x, y) => (A[x] - A[y]) || ((AI.includes(y) ? 1 : 0) - (AI.includes(x) ? 1 : 0)) || x - y).slice(0, 3);
+  const nm = i => `${i + 1}. ${TASKS[i].text}${AI.includes(i) ? '<span class="tagai">AI</span>' : ""}`;
+  $("str").innerHTML = st.length ? st.slice(0, 5).map(i => `<li>${nm(i)}</li>`).join("") + (st.length > 5 ? `<li><em>and ${st.length - 5} more</em></li>` : "") : "<li>Nothing rated On my own yet, and that is fine. This is your starting point.</li>";
+  $("dev").innerHTML = focus.length ? focus.map(i => `<li>${nm(i)}</li>`).join("") + `<li class="small" style="list-style:none;margin-left:-20px">Three to start with. The module will help you with these and more.</li>` : "<li>You rated every task On my own. Focus on helping colleagues and learners build these skills.</li>";
+  $("all").innerHTML = idx.map(i => `<li>${i + 1}. ${TASKS[i].text}: <strong>${LABELS[A[i]]}</strong></li>`).join("");
   const esc = t => t.replace(/[&<>]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" }[c]));
   const meta = [["Name", val("nm") || "Not given"], ["Institution", val("org") || "Not given"], ["Job title", val("job") || "Not given"],
-                ["Role, subject or area", val("role") || "Not given"], ["Confidence with AI", conf ? conf + " out of 5" : "Not given"],
+                ["Role, subject or area", val("role") || "Not given"],
                 ["Completed", new Date().toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" })]];
   $("meta").innerHTML = meta.map(m => `<div><b>${m[0]}</b>${esc(m[1])}</div>`).join("");
-  $("ans").innerHTML = QS.map(q => `<h3>${q[1]}</h3><p>${esc(val(q[0]) || "No answer given")}</p>`).join("");
+  $("ans").innerHTML = QS.map(q => { const t = val(q[0]); const L = t ? linked(t) : [];
+    return `<h3>${q[1]}</h3><p>${esc(t || "No answer given")}</p>` + (L.length ? `<div class="chips">${L.map(i => `<span class="chip">Task ${i + 1}, ${TASKS[i].text}</span>`).join("")}</div>` : ""); }).join("");
   ["intro", "form", "open", "bar"].forEach(id => $(id).classList.add("hidden")); $("results").classList.remove("hidden");
   scrollTo(0, 0);
 }
 function mailBody() {
-  let t = `AIE401 Initial AI Skills Assessment\n\nName: ${val("nm") || "Not given"}\nInstitution: ${val("org") || "Not given"}\nJob title: ${val("job") || "Not given"}\nRole, subject or area: ${val("role") || "Not given"}\nConfidence with AI: ${conf ? conf + " out of 5" : "Not given"}\nDate: ${new Date().toLocaleDateString("en-GB")}\n\nOverall: ${overall()}% (${level(overall())})\n\n`;
+  let t = `AIE401 Initial AI Skills Assessment\n\nName: ${val("nm") || "Not given"}\nInstitution: ${val("org") || "Not given"}\nJob title: ${val("job") || "Not given"}\nRole, subject or area: ${val("role") || "Not given"}\nDate: ${new Date().toLocaleDateString("en-GB")}\n\nEssential digital skills: ${pctOf(DIG)}% (${level(pctOf(DIG))})\nAI skills: ${pctOf(AI)}% (${level(pctOf(AI))})\nConfidence with AI: ${conf ? conf + " out of 5" : "Not given"}\n\n`;
   AREAS.forEach((a, ai) => t += `${a[0]}: ${areaPct(ai)}%\n`);
   t += `\nTask ratings\n`; TASKS.forEach((x, i) => t += `${i + 1}. ${x.text}: ${LABELS[A[i]]}\n`);
   QS.forEach(q => t += `\n${q[1]}\n${val(q[0]) || "No answer given"}\n`);
@@ -282,7 +309,6 @@ function mailBody() {
 $("go").onclick = $("go2").onclick = results;
 $("print").onclick = () => print();
 $("file").onclick = () => { const a = document.createElement("a"); a.href = URL.createObjectURL(new Blob([mailBody()], { type: "text/plain" })); a.download = "AIE401 Initial AI Skills Assessment, " + (val("nm") || "results") + ".txt"; document.body.appendChild(a); a.click(); a.remove(); };
-$("mail").onclick = () => { const nm = val("nm") || "Participant"; location.href = `mailto:${encodeURIComponent($("to").value.trim())}?subject=${encodeURIComponent("AIE401 Initial AI Skills Assessment, " + nm)}&body=${encodeURIComponent(mailBody())}`; };
 $("edit").onclick = () => { ["intro", "form", "open", "bar"].forEach(id => $(id).classList.remove("hidden")); $("results").classList.add("hidden"); };
 $("reset").onclick = () => { if (!confirm("Clear all your answers and start again?")) return; A = {}; store.set("aie401-ia", A); FIELDS.forEach(id => { $(id).value = ""; store.set("aie401-" + id, ""); }); conf = null; store.set("aie401-conf", null); $("conf").querySelectorAll("button").forEach(x => x.setAttribute("aria-pressed", false)); build(); $("edit").onclick(); scrollTo(0, 0); };
 build();
