@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AIE401 Initial AI Skills Assessment</title>
+<meta name="description" content="Initial AI skills assessment for AIE401 Artificial Intelligence for Educators, based on the 25 tasks of the AI embedded Essential Digital Skills Framework.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root { --navy:#003E66; --teal:#57B29F; --cyan:#008DA5; --dteal:#004451; --lteal:#99D0C5; --mint:#E4F2EE; --mint2:#F1F8F6; --ink:#1F2A33; --muted:#4F5D66; --line:#D5E2E5; --bg:#F4F7F8; }
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body { font-family: "Montserrat", "Segoe UI", Arial, sans-serif; color: var(--ink); background: var(--bg); line-height: 1.5; }
+a { color: var(--cyan); }
+:focus-visible { outline: 3px solid #000; outline-offset: 2px; box-shadow: 0 0 0 6px #ffdd00; }
+.top { background: var(--navy); color: #fff; padding: 28px 20px 26px; position: relative; }
+.top::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 6px; background: linear-gradient(90deg, var(--teal), var(--cyan)); }
+.wrap { max-width: 980px; margin: 0 auto; padding: 0 20px; }
+.top .wrap { padding: 0; }
+.kick { font-size: .78rem; font-weight: 700; letter-spacing: .14em; color: var(--lteal); text-transform: uppercase; }
+h1 { font-size: clamp(1.6rem, 4vw, 2.3rem); margin: 6px 0 6px; line-height: 1.15; }
+.top p { margin: 0; color: #dfeef0; max-width: 680px; }
+.card { background: #fff; border-radius: 16px; padding: 22px; margin: 18px 0; box-shadow: 0 1px 2px rgba(0,30,50,.06), 0 4px 14px rgba(0,30,50,.07); }
+h2 { color: var(--navy); font-size: 1.25rem; margin: 0 0 10px; display: flex; align-items: center; gap: 10px; }
+h2::before { content: ""; width: 6px; height: 22px; background: var(--teal); border-radius: 3px; }
+label { font-weight: 700; font-size: .9rem; color: var(--navy); display: block; margin-bottom: 4px; }
+input[type=text], input[type=email] { width: 100%; font: inherit; padding: 10px 12px; border: 2px solid var(--line); border-radius: 10px; }
+.fields { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; }
+.scale { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 8px; }
+.scale div { background: var(--mint2); border-radius: 10px; padding: 10px 12px; font-size: .85rem; }
+.scale b { display: block; color: var(--navy); }
+.area-h { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+.pill { font-size: .75rem; font-weight: 700; background: var(--mint); color: var(--dteal); border-radius: 999px; padding: 3px 10px; }
+.task { padding: 14px 0; border-top: 1px solid var(--line); }
+.task p { margin: 0 0 8px; }
+.task .n { color: var(--cyan); font-weight: 800; margin-right: 6px; }
+.task .eg { color: var(--muted); font-size: .85rem; }
+.opts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.opts button { font: inherit; font-size: .85rem; font-weight: 700; padding: 10px 6px; border-radius: 10px; border: 2px solid var(--line); background: #fff; color: var(--ink); cursor: pointer; }
+.opts button:hover { border-color: var(--lteal); }
+.opts button[aria-pressed="true"][data-v="0"] { background: #fbe9e7; border-color: #b3261e; }
+.opts button[aria-pressed="true"][data-v="1"] { background: #fff3d6; border-color: #8a5a00; }
+.opts button[aria-pressed="true"][data-v="2"] { background: #e1f4ea; border-color: #1f7a4d; }
+.progress { position: sticky; top: 0; z-index: 5; background: #fff; border-bottom: 1px solid var(--line); }
+.progress .wrap { display: flex; align-items: center; gap: 14px; padding-top: 10px; padding-bottom: 10px; }
+.track { flex: 1; height: 10px; background: var(--mint); border-radius: 99px; overflow: hidden; }
+.track span { display: block; height: 100%; width: 0; background: linear-gradient(90deg, var(--teal), var(--cyan)); transition: width .3s; }
+.btn { font: inherit; font-weight: 700; border: 0; border-radius: 12px; padding: 12px 18px; background: var(--navy); color: #fff; cursor: pointer; text-decoration: none; display: inline-block; }
+.btn.alt { background: var(--teal); }
+.btn.ghost { background: transparent; color: var(--navy); border: 2px solid var(--navy); }
+.btn[disabled] { opacity: .45; cursor: not-allowed; }
+.row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+.hidden { display: none !important; }
+.res-top { display: grid; grid-template-columns: 200px 1fr; gap: 22px; align-items: center; }
+.big { width: 180px; height: 180px; border-radius: 50%; display: grid; place-items: center; text-align: center; color: var(--navy); }
+.big b { font-size: 2.6rem; display: block; line-height: 1; }
+.big span { font-size: .85rem; font-weight: 700; color: var(--muted); }
+.bars .b { display: grid; grid-template-columns: 1fr 52px; gap: 10px; align-items: center; margin: 10px 0; }
+.bars .lab { font-weight: 700; font-size: .9rem; color: var(--navy); margin-bottom: 4px; }
+.bars .track { height: 14px; }
+.bars .pc { font-weight: 800; color: var(--navy); text-align: right; }
+.cols { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.cols ul { margin: 6px 0 0; padding-left: 20px; }
+.cols li { margin: 4px 0; font-size: .9rem; }
+.box-ok { background: #e1f4ea; border-radius: 12px; padding: 14px 16px; }
+.box-dev { background: #fff3d6; border-radius: 12px; padding: 14px 16px; }
+.box-ok h3, .box-dev h3 { margin: 0; font-size: 1rem; color: var(--navy); }
+.small { font-size: .82rem; color: var(--muted); }
+.logos { display: flex; align-items: center; justify-content: space-between; gap: 18px; flex-wrap: wrap; border-top: 1px solid var(--line); padding: 18px 0 26px; margin-top: 10px; }
+.logos img { height: 44px; width: auto; }
+.print-only { display: none; }
+textarea { width: 100%; font: inherit; padding: 10px 12px; border: 2px solid var(--line); border-radius: 10px; resize: vertical; }
+.q { margin: 14px 0; }
+.conf { grid-template-columns: repeat(5, 1fr); }
+.conf button[aria-pressed="true"] { background: var(--mint); border-color: var(--teal); }
+.ans h3 { font-size: .95rem; color: var(--navy); margin: 12px 0 2px; }
+.ans p { margin: 0; white-space: pre-wrap; }
+.meta { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 6px 18px; font-size: .9rem; }
+.meta b { color: var(--navy); display: block; font-size: .78rem; text-transform: uppercase; letter-spacing: .06em; }
+@media (max-width: 680px) { .res-top, .cols { grid-template-columns: 1fr; } .opts, .scale { grid-template-columns: 1fr; } .big { margin: 0 auto; } }
+@media print {
+  @page { size: A4; margin: 12mm; }
+  body { background: #fff; font-size: 10pt; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .no-print, .progress, #intro, #form, #open { display: none !important; }
+  .print-only { display: block; }
+  .card { box-shadow: none; border: 1px solid var(--line); padding: 14px; margin: 10px 0; break-inside: avoid; }
+  .top { padding: 16px 14px; }
+  .logos img { height: 34px; }
+  .big { width: 140px; height: 140px; }
+  .card.flow { break-inside: auto; }
+  .cols { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .cols li { font-size: 8.5pt; margin: 2px 0; }
+  .bars .b { margin: 4px 0; }
+  .res-top { grid-template-columns: 160px 1fr; }
+}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <div class="kick">AIE401 Artificial Intelligence for Educators</div>
+    <h1>Initial AI Skills Assessment</h1>
+    <p>Twenty five workplace tasks from the AI embedded Essential Digital Skills Framework. Rate yourself honestly, see your results, then print them or email them to your tutor.</p>
+  </div>
+</header>
+
+<div class="progress no-print" id="bar"><div class="wrap"><strong id="count" aria-live="polite">0 of 25</strong><div class="track"><span id="fill"></span></div><button class="btn" id="go" disabled>See my results</button></div></div>
+
+<main class="wrap">
+  <section class="card" id="intro">
+    <h2>About you</h2>
+    <div class="fields">
+      <div><label for="nm">Your name</label><input type="text" id="nm" autocomplete="name"></div>
+      <div><label for="org">Institution</label><input type="text" id="org" autocomplete="organization"></div>
+      <div><label for="job">Job title</label><input type="text" id="job" autocomplete="organization-title"></div>
+      <div><label for="role">Your role, subject or area</label><input type="text" id="role" placeholder="For example, Level 3 Business tutor"></div>
+    </div>
+    <p style="margin:16px 0 4px">For each task, choose the statement that fits you best today. There are no right or wrong answers, this sets your starting point.</p>
+    <div class="scale">
+      <div><b>Not yet</b>I cannot do this yet</div>
+      <div><b>With help</b>I can do this with some support</div>
+      <div><b>On my own</b>I can do this confidently and independently</div>
+    </div>
+    <p class="small" style="margin-top:12px">Your answers stay in this browser. Nothing is sent anywhere unless you choose to email your results.</p>
+  </section>
+
+  <div id="form"></div>
+
+  <section class="card" id="open">
+    <div class="area-h"><h2>Your thoughts</h2><span class="pill">Open questions</span></div>
+    <p style="margin-top:0">A few sentences for each is plenty. These help your tutors shape the module around you.</p>
+    <div class="q"><label id="conf-l">How confident do you feel using AI in your teaching or role today?</label>
+      <div class="opts conf" id="conf" role="group" aria-labelledby="conf-l"></div></div>
+    <div class="q"><label for="o2">How are you using AI in your role at the moment, if at all?</label><textarea id="o2" rows="3"></textarea></div>
+    <div class="q"><label for="o3">Where could AI make the biggest difference in your setting?</label><textarea id="o3" rows="3"></textarea></div>
+    <div class="q"><label for="o4">What concerns you most about AI in education?</label><textarea id="o4" rows="3"></textarea></div>
+    <div class="q"><label for="o5">What do you want to take from this module?</label><textarea id="o5" rows="3"></textarea></div>
+    <div class="row" style="margin-top:14px"><button class="btn" id="go2" disabled>See my results</button><span class="small" id="left"></span></div>
+  </section>
+
+  <section id="results" class="hidden">
+    <div class="card"><h2>About you</h2><div class="meta" id="meta"></div></div>
+    <div class="card">
+      <h2>Your starting point</h2>
+      <div class="res-top">
+        <div class="big" id="ring"><div><b id="ov">0%</b><span id="lvl"></span></div></div>
+        <div class="bars" id="bars"></div>
+      </div>
+    </div>
+    <div class="card flow">
+      <div class="cols">
+        <div class="box-ok"><h3>Your strengths</h3><ul id="str"></ul></div>
+        <div class="box-dev"><h3>Your priorities to develop</h3><ul id="dev"></ul></div>
+      </div>
+      <p class="small" style="margin-bottom:0;margin-top:14px">Keep these results. You will repeat this assessment at the AI for Educators Summit and compare, and you can draw on it in the professional reflection on your poster.</p>
+    </div>
+    <div class="card flow"><h2>Your thoughts</h2><div class="ans" id="ans"></div></div>
+    <div class="card no-print">
+      <h2>Save and send</h2>
+      <div class="fields" style="margin-bottom:14px">
+        <div><label for="to">Send to</label><input type="email" id="to" value="lee.holroyd@blackpool.ac.uk"></div>
+      </div>
+      <div class="row">
+        <button class="btn" id="print">Print or save as PDF</button>
+        <button class="btn alt" id="mail">Email my results</button>
+        <button class="btn ghost" id="edit">Change my answers</button>
+        <button class="btn ghost" id="reset">Start again</button>
+      </div>
+      <p class="small">Email opens your own email app with your results written in. To attach a PDF copy, choose Print, save as PDF, then attach it.</p>
+    </div>
+  </section>
+
+  <p class="small">Based on FutureDotNow (2026) <em>How to be work ready in the age of AI</em>, and the AI embedded Essential Digital Skills Framework developed by FutureDotNow with the Department for Science, Innovation and Technology. See <a href="https://www.futuredotnow.uk/framework">futuredotnow.uk/framework</a>.</p>
+  <div class="logos">
+    <img src="../assets/logos/logo_bfc_group.png" alt="B&amp;FC Group">
+    <img src="../assets/logos/logo_bfc_college.png" alt="Blackpool and The Fylde College">
+    <img src="../assets/logos/soc.png" alt="Blackpool School of Computing">
+    <img src="../assets/logos/logo_iot.png" alt="Lancashire and Cumbria Institute of Technology">
+  </div>
+</main>
+
+<script>
+const AREAS = [
+  ["Handling information and content", [
+    ["Follow your organisation's IT policies when sharing information", "Classifying documents, encrypting sensitive information, never putting sensitive data into unauthorised AI tools"],
+    ["Securely access, synchronise and share information across devices", "Managing email, calendar or appointments on different devices"]]],
+  ["Communicating", [
+    ["Communicate in the workplace using messaging apps", "Email, Microsoft Teams, Zoom, Slack, intranet"],
+    ["Use workplace digital tools to create, share and collaborate", "Teams, OneDrive, Google Workspace with Gemini, Office 365 with Copilot, ChatGPT"],
+    ["Set up and manage an account on a professional online network", "LinkedIn or a professional community"]]],
+  ["Transacting", [
+    ["Complete digital records within your organisation", "Absence, holidays, timesheets, expenses"],
+    ["Access salary and tax information digitally", "Password protected payslips, P60, P45"],
+    ["Complete online transactions and spot AI related risks", "Recognising AI generated scams or deceptive interfaces"]]],
+  ["Problem solving", [
+    ["Find information online and use digital tools to solve work problems", "Search engines, IT helpdesk, AI assistants, authorised generative AI"],
+    ["Improve your skills using online tutorials and AI assisted tools", "LinkedIn Learning, YouTube, AI learning assistants, internal platforms"],
+    ["Use the software your day to day job requires", "Spreadsheets, booking systems, AI powered analytics, automated scheduling"],
+    ["Improve productivity using digital tools and appropriate AI", "Project management tools, AI assisted task automation, meeting transcription"],
+    ["Write effective prompts for AI to solve specific work problems", "Treating AI as a complement to, not a replacement for, your own judgement"]]],
+  ["Staying safe, legal and responsible online", [
+    ["Act with caution online, including when using AI tools", "Following data handling policies for AI, avoiding unauthorised AI services and deepfakes"],
+    ["Follow data protection guidelines online", "Not sharing other people's data without consent, understanding consent for AI training data"],
+    ["Recognise suspicious links and content, human or AI generated", "Phishing emails, AI enhanced scams, deceptive texts"],
+    ["Be careful what you share, knowing it may train AI or shape decisions about you", "Public photos, forums, personal information or opinions"],
+    ["Respond to authentication requests for online accounts", "Password resets, two factor authentication, authenticator apps"],
+    ["Identify secure websites", "The padlock and https in the address bar"],
+    ["Identify secure Wi-Fi networks", "Networks that need a unique password from a trusted source"],
+    ["Keep device software up to date", "Enabling automatic updates or installing when prompted"],
+    ["Set privacy and marketing settings for your accounts", "Cookie settings, contact preferences, opting out of AI personalisation"],
+    ["Understand the basic principles of AI, its limits and when to use it", "How AI is trained, its data needs, and when a tool suits a task"],
+    ["Recognise the ethical implications and societal impact of AI", "Bias, human oversight, environmental impact, privacy, fairness and rights"],
+    ["Understand and manage AI risks in your job", "Keeping up with new AI, data privacy, following AI guidance for your sector"]]]
+];
+const TASKS = []; AREAS.forEach((a, ai) => a[1].forEach(t => TASKS.push({ area: ai, text: t[0], eg: t[1] })));
+const LABELS = ["Not yet", "With help", "On my own"];
+const store = { get(k) { try { return JSON.parse(localStorage.getItem(k)); } catch (e) { return null; } }, set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} } };
+let A = store.get("aie401-ia") || {};
+const $ = id => document.getElementById(id);
+const FIELDS = ["nm", "org", "job", "role", "o2", "o3", "o4", "o5"];
+FIELDS.forEach(id => { const v = store.get("aie401-" + id); if (v) $(id).value = v; $(id).oninput = () => store.set("aie401-" + id, $(id).value); });
+const CONF = ["1, not at all", "2", "3, somewhat", "4", "5, very"];
+let conf = store.get("aie401-conf");
+$("conf").innerHTML = CONF.map((l, i) => `<button type="button" data-c="${i + 1}" aria-pressed="${conf === i + 1}">${l}</button>`).join("");
+$("conf").querySelectorAll("button").forEach(b => b.onclick = () => { conf = +b.dataset.c; store.set("aie401-conf", conf); $("conf").querySelectorAll("button").forEach(x => x.setAttribute("aria-pressed", x === b)); });
+const QS = [["o2", "How I use AI in my role now"], ["o3", "Where AI could make the biggest difference"], ["o4", "My main concerns"], ["o5", "What I want to take from this module"]];
+const val = id => $(id).value.trim();
+
+function build() {
+  let n = 0, html = "";
+  AREAS.forEach((a, ai) => {
+    html += `<section class="card"><div class="area-h"><h2>${a[0]}</h2><span class="pill">${a[1].length} tasks</span></div>`;
+    a[1].forEach(t => {
+      n++; const i = n - 1;
+      html += `<div class="task" role="group" aria-labelledby="q${i}"><p id="q${i}"><span class="n">${n}.</span><strong>${t[0]}</strong><br><span class="eg">For example: ${t[1]}</span></p><div class="opts">` +
+        LABELS.map((l, v) => `<button type="button" data-i="${i}" data-v="${v}" aria-pressed="${A[i] === v}">${l}</button>`).join("") + `</div></div>`;
+    });
+    html += `</section>`;
+  });
+  $("form").innerHTML = html;
+  $("form").querySelectorAll("button").forEach(b => b.onclick = () => {
+    const i = +b.dataset.i, v = +b.dataset.v; A[i] = v; store.set("aie401-ia", A);
+    b.parentNode.querySelectorAll("button").forEach(x => x.setAttribute("aria-pressed", x === b)); count();
+  });
+  count();
+}
+function count() {
+  const n = Object.keys(A).length;
+  $("count").textContent = n + " of 25"; $("fill").style.width = (n / 25 * 100) + "%"; $("go").disabled = $("go2").disabled = n < 25;
+  $("left").textContent = n < 25 ? (25 - n) + " tasks still to rate above" : "";
+}
+function areaPct(ai) { const ix = TASKS.map((t, i) => [t, i]).filter(x => x[0].area === ai).map(x => x[1]); return Math.round(ix.reduce((s, i) => s + A[i], 0) / (ix.length * 2) * 100); }
+function overall() { return Math.round(TASKS.reduce((s, _, i) => s + A[i], 0) / 50 * 100); }
+function level(p) { return p >= 80 ? "Confident" : p >= 55 ? "Developing" : p >= 30 ? "Emerging" : "Starting out"; }
+function results() {
+  const ov = overall();
+  $("ov").textContent = ov + "%"; $("lvl").textContent = level(ov);
+  $("ring").style.background = `conic-gradient(var(--teal) 0 ${ov}%, var(--mint) ${ov}% 100%)`;
+  $("ring").firstElementChild.style.cssText = "background:#fff;width:76%;height:76%;border-radius:50%;display:grid;place-content:center";
+  $("bars").innerHTML = AREAS.map((a, ai) => { const p = areaPct(ai); return `<div><div class="lab">${a[0]}</div><div class="b"><div class="track"><span style="width:${p}%"></span></div><div class="pc">${p}%</div></div></div>`; }).join("");
+  const s = TASKS.map((t, i) => [t, i]).filter(x => A[x[1]] === 2), d = TASKS.map((t, i) => [t, i]).filter(x => A[x[1]] < 2).sort((x, y) => A[x[1]] - A[y[1]]);
+  $("str").innerHTML = s.length ? s.map(x => `<li>${x[1] + 1}. ${x[0].text}</li>`).join("") : "<li>Nothing rated On my own yet, and that is fine. This is your starting point.</li>";
+  $("dev").innerHTML = d.length ? d.map(x => `<li>${x[1] + 1}. ${x[0].text} <em>(${LABELS[A[x[1]]]})</em></li>`).join("") : "<li>Every task rated On my own. Focus on helping colleagues and learners build these skills.</li>";
+  const esc = t => t.replace(/[&<>]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" }[c]));
+  const meta = [["Name", val("nm") || "Not given"], ["Institution", val("org") || "Not given"], ["Job title", val("job") || "Not given"],
+                ["Role, subject or area", val("role") || "Not given"], ["Confidence with AI", conf ? conf + " out of 5" : "Not given"],
+                ["Completed", new Date().toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" })]];
+  $("meta").innerHTML = meta.map(m => `<div><b>${m[0]}</b>${esc(m[1])}</div>`).join("");
+  $("ans").innerHTML = QS.map(q => `<h3>${q[1]}</h3><p>${esc(val(q[0]) || "No answer given")}</p>`).join("");
+  ["intro", "form", "open", "bar"].forEach(id => $(id).classList.add("hidden")); $("results").classList.remove("hidden");
+  scrollTo(0, 0);
+}
+function mailBody() {
+  let t = `AIE401 Initial AI Skills Assessment\n\nName: ${val("nm") || "Not given"}\nInstitution: ${val("org") || "Not given"}\nJob title: ${val("job") || "Not given"}\nRole, subject or area: ${val("role") || "Not given"}\nConfidence with AI: ${conf ? conf + " out of 5" : "Not given"}\nDate: ${new Date().toLocaleDateString("en-GB")}\n\nOverall: ${overall()}% (${level(overall())})\n\n`;
+  AREAS.forEach((a, ai) => t += `${a[0]}: ${areaPct(ai)}%\n`);
+  t += `\nTask ratings\n`; TASKS.forEach((x, i) => t += `${i + 1}. ${x.text}: ${LABELS[A[i]]}\n`);
+  QS.forEach(q => t += `\n${q[1]}\n${val(q[0]) || "No answer given"}\n`);
+  return t;
+}
+$("go").onclick = $("go2").onclick = results;
+$("print").onclick = () => print();
+$("mail").onclick = () => { const nm = val("nm") || "Participant"; location.href = `mailto:${encodeURIComponent($("to").value.trim())}?subject=${encodeURIComponent("AIE401 Initial AI Skills Assessment, " + nm)}&body=${encodeURIComponent(mailBody())}`; };
+$("edit").onclick = () => { ["intro", "form", "open", "bar"].forEach(id => $(id).classList.remove("hidden")); $("results").classList.add("hidden"); };
+$("reset").onclick = () => { if (!confirm("Clear all your answers and start again?")) return; A = {}; store.set("aie401-ia", A); FIELDS.forEach(id => { $(id).value = ""; store.set("aie401-" + id, ""); }); conf = null; store.set("aie401-conf", null); $("conf").querySelectorAll("button").forEach(x => x.setAttribute("aria-pressed", false)); build(); $("edit").onclick(); scrollTo(0, 0); };
+build();
+</script>
+</body>
+</html>
