@@ -25,7 +25,7 @@ h1 { font-size: clamp(1.6rem, 4vw, 2.3rem); margin: 6px 0 6px; line-height: 1.15
 h2 { color: var(--navy); font-size: 1.25rem; margin: 0 0 10px; display: flex; align-items: center; gap: 10px; }
 h2::before { content: ""; width: 6px; height: 22px; background: var(--teal); border-radius: 3px; }
 label { font-weight: 700; font-size: .9rem; color: var(--navy); display: block; margin-bottom: 4px; }
-input[type=text], input[type=email] { width: 100%; font: inherit; padding: 10px 12px; border: 2px solid var(--line); border-radius: 10px; }
+input[type=text], input[type=email] { width: 100%; font: inherit; padding: 10px 12px; border: 2px solid var(--navy); border-radius: 10px; }
 .fields { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; }
 .scale { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 8px; }
 .scale div { background: var(--mint2); border-radius: 10px; padding: 10px 12px; font-size: .85rem; }
@@ -37,8 +37,8 @@ input[type=text], input[type=email] { width: 100%; font: inherit; padding: 10px 
 .task .n { color: var(--cyan); font-weight: 800; margin-right: 6px; }
 .task .eg { color: var(--muted); font-size: .85rem; }
 .opts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
-.opts button { font: inherit; font-size: .85rem; font-weight: 700; padding: 10px 6px; border-radius: 10px; border: 2px solid var(--line); background: #fff; color: var(--ink); cursor: pointer; }
-.opts button:hover { border-color: var(--lteal); }
+.opts button { font: inherit; font-size: .85rem; font-weight: 700; padding: 10px 6px; border-radius: 10px; border: 2px solid var(--navy); background: #fff; color: var(--ink); cursor: pointer; }
+.opts button:hover { background: var(--mint); }
 .opts button[aria-pressed="true"][data-v="0"] { background: #fbe9e7; border-color: #b3261e; }
 .opts button[aria-pressed="true"][data-v="1"] { background: #fff3d6; border-color: #8a5a00; }
 .opts button[aria-pressed="true"][data-v="2"] { background: #e1f4ea; border-color: #1f7a4d; }
@@ -70,7 +70,7 @@ input[type=text], input[type=email] { width: 100%; font: inherit; padding: 10px 
 .logos { display: flex; align-items: center; justify-content: space-between; gap: 18px; flex-wrap: wrap; border-top: 1px solid var(--line); padding: 18px 0 26px; margin-top: 10px; }
 .logos img { height: 44px; width: auto; }
 .print-only { display: none; }
-textarea { width: 100%; font: inherit; padding: 10px 12px; border: 2px solid var(--line); border-radius: 10px; resize: vertical; }
+textarea { width: 100%; font: inherit; padding: 10px 12px; border: 2px solid var(--navy); border-radius: 10px; resize: vertical; }
 .q { margin: 14px 0; }
 .conf { grid-template-columns: repeat(5, 1fr); }
 .conf button[aria-pressed="true"] { background: var(--mint); border-color: var(--teal); }
@@ -164,10 +164,11 @@ textarea { width: 100%; font: inherit; padding: 10px 12px; border: 2px solid var
       <div class="row">
         <button class="btn" id="print">Print or save as PDF</button>
         <button class="btn alt" id="mail">Email my results</button>
+        <button class="btn ghost" id="file">Download as a file</button>
         <button class="btn ghost" id="edit">Change my answers</button>
         <button class="btn ghost" id="reset">Start again</button>
       </div>
-      <p class="small">Email opens your own email app with your results written in. To attach a PDF copy, choose Print, save as PDF, then attach it.</p>
+      <p class="small">To download a PDF, choose Print or save as PDF, then pick Save as PDF as the printer. Download as a file saves a plain text copy. Email opens your own email app with your results written in.</p>
     </div>
   </section>
 
@@ -280,6 +281,7 @@ function mailBody() {
 }
 $("go").onclick = $("go2").onclick = results;
 $("print").onclick = () => print();
+$("file").onclick = () => { const a = document.createElement("a"); a.href = URL.createObjectURL(new Blob([mailBody()], { type: "text/plain" })); a.download = "AIE401 Initial AI Skills Assessment, " + (val("nm") || "results") + ".txt"; document.body.appendChild(a); a.click(); a.remove(); };
 $("mail").onclick = () => { const nm = val("nm") || "Participant"; location.href = `mailto:${encodeURIComponent($("to").value.trim())}?subject=${encodeURIComponent("AIE401 Initial AI Skills Assessment, " + nm)}&body=${encodeURIComponent(mailBody())}`; };
 $("edit").onclick = () => { ["intro", "form", "open", "bar"].forEach(id => $(id).classList.remove("hidden")); $("results").classList.add("hidden"); };
 $("reset").onclick = () => { if (!confirm("Clear all your answers and start again?")) return; A = {}; store.set("aie401-ia", A); FIELDS.forEach(id => { $(id).value = ""; store.set("aie401-" + id, ""); }); conf = null; store.set("aie401-conf", null); $("conf").querySelectorAll("button").forEach(x => x.setAttribute("aria-pressed", false)); build(); $("edit").onclick(); scrollTo(0, 0); };
