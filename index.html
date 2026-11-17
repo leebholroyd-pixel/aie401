@@ -20,9 +20,9 @@ a { color: var(--cyan); }
 h1 { font-size: clamp(1.7rem, 4.5vw, 2.5rem); margin: 6px 0 8px; line-height: 1.15; }
 .meta { color: #dfeef0; font-weight: 600; }
 main { padding: 0 20px; }
-.quick { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; margin: 22px 0 6px; }
-.quick a { display: block; text-decoration: none; background: #fff; border-radius: 14px; padding: 16px 18px; color: var(--ink); border-top: 5px solid var(--teal); box-shadow: 0 1px 2px rgba(0,30,50,.06), 0 4px 14px rgba(0,30,50,.07); }
-.quick a:nth-child(2) { border-top-color: var(--cyan); } .quick a:nth-child(3) { border-top-color: var(--navy); }
+.quick { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 14px; margin: 22px 0 6px; }
+.quick > a, .skillcard { display: block; text-decoration: none; background: #fff; border-radius: 14px; padding: 16px 18px; color: var(--ink); border-top: 5px solid var(--teal); box-shadow: 0 1px 2px rgba(0,30,50,.06), 0 4px 14px rgba(0,30,50,.07); }
+.quick > a:nth-child(2) { border-top-color: var(--cyan); } .quick > a:nth-child(3) { border-top-color: var(--navy); }
 .quick b { display: block; color: var(--navy); font-size: 1.05rem; }
 .quick span { font-size: .85rem; color: var(--muted); }
 section { background: #fff; border-radius: 16px; padding: 22px; margin: 18px 0; box-shadow: 0 1px 2px rgba(0,30,50,.06), 0 4px 14px rgba(0,30,50,.07); }
@@ -46,21 +46,36 @@ ul.list li:first-child { border-top: 0; }
 .cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 12px; margin-top: 14px; }
 .card-img { display: block; text-decoration: none; color: var(--navy); font-weight: 700; font-size: .85rem; background: var(--mint2); border-radius: 12px; padding: 8px; text-align: center; }
 .card-img img { width: 100%; height: auto; border-radius: 8px; display: block; margin-bottom: 6px; }
+.hd { } .top .wrap::after { content: ""; display: block; clear: both; }
+.share { margin-top: 6px; color: #dfeef0; font-size: .92rem; } .share a { color: #fff; font-weight: 700; }
+.qrbox { float: right; margin-left: 20px; background: #fff; border-radius: 12px; padding: 8px; text-align: center; text-decoration: none; color: var(--navy); font-size: .72rem; font-weight: 700; }
+.qrbox img { width: 96px; height: 96px; display: block; margin-bottom: 2px; }
+.skillcard { display: flex !important; gap: 14px; align-items: center; justify-content: space-between; }
+.skl { text-decoration: none; color: var(--ink); }
+.skl b { display: block; color: var(--navy); font-size: 1.05rem; } .skl span { display: block; font-size: .85rem; color: var(--muted); }
+.skl .url { color: var(--cyan); font-weight: 800; font-size: .95rem; margin-top: 6px; }
+.qrs { flex: none; text-align: center; text-decoration: none; color: var(--navy); font-size: .7rem; font-weight: 700; }
+.qrs img { width: 100px; height: 100px; display: block; border: 2px solid var(--navy); border-radius: 8px; margin-bottom: 3px; }
+@media (max-width: 760px) { .quick { grid-template-columns: 1fr; } }
 .note { background: var(--mint); border-radius: 12px; padding: 12px 16px; color: var(--dteal); font-weight: 600; font-size: .9rem; margin-top: 12px; }
 .logos { display: flex; align-items: center; justify-content: space-between; gap: 18px; flex-wrap: wrap; border-top: 1px solid var(--line); padding: 20px 0 30px; margin-top: 10px; }
 .logos img { height: 44px; width: auto; }
-@media (max-width: 640px) { ul.list li { grid-template-columns: 1fr; gap: 6px; } .acts { justify-content: flex-start; } }
+@media (max-width: 640px) { ul.list li { grid-template-columns: 1fr; gap: 6px; } .acts { justify-content: flex-start; } .kind { justify-self: start; padding: 4px 10px; } }
 </style>
 </head>
 <body>
 <header class="top"><div class="wrap">
+  <a class="qrbox" href="assets/qr-session1.png" target="_blank" rel="noopener"><img src="assets/qr-session1.png" alt="QR code for this page, tinyurl.com/AIE401SessionOne"><span>Scan for this page</span></a>
   <div class="kick">AIE401 Artificial Intelligence for Educators</div>
   <h1>Session 1 resources</h1>
-  <div class="meta">Wednesday 18 November 2026, 13:15 to 17:00, online via Microsoft Teams</div>
+  <div class="hd"><div><div class="meta">Wednesday 18 November 2026, 13:15 to 17:00, online via Microsoft Teams</div>
+  <div class="share">Share this page: <a href="https://tinyurl.com/AIE401SessionOne">tinyurl.com/AIE401SessionOne</a></div></div>
+</div>
 </div></header>
 <main class="wrap">
   <nav class="quick" aria-label="Quick links">
-    <a href="skills/"><b>Initial AI skills assessment</b><span>Complete it online at 14:15, then print or download your results</span></a>
+    <div class="skillcard"><a class="skl" href="skills/"><b>Initial AI skills assessment</b><span>Complete it online at 14:15, then print or download your results</span><span class="url">tinyurl.com/AIE401skills</span></a>
+      <a class="qrs" href="assets/qr-skills.png" target="_blank" rel="noopener"><img src="assets/qr-skills.png" alt="QR code for the initial AI skills assessment, tinyurl.com/AIE401skills"><span>Open QR code</span></a></div>
     <a href="#slides"><b>Today&rsquo;s slides</b><span>All seven presentations, in running order</span></a>
     <a href="#assessment"><b>The assessment</b><span>Your assessment brief for the module</span></a>
   </nav>
