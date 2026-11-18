@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AU0009 Week 1 Resources</title>
+<meta name="description" content="Slides, learner pack and the initial AI skills assessment for AU0009 AI Leadership, AI Strategy and Opportunity, Week 1.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root { --navy:#003E66; --teal:#57B29F; --cyan:#008DA5; --dteal:#004451; --lteal:#99D0C5; --mint:#E4F2EE; --mint2:#F1F8F6; --ink:#1F2A33; --muted:#4F5D66; --line:#D5E2E5; --bg:#F4F7F8; }
+* { box-sizing: border-box; }
+body { margin: 0; font-family: "Montserrat", "Segoe UI", Arial, sans-serif; color: var(--ink); background: var(--bg); line-height: 1.5; }
+a { color: var(--cyan); }
+:focus-visible { outline: 3px solid #000; outline-offset: 2px; box-shadow: 0 0 0 6px #ffdd00; }
+.top { background: var(--navy); color: #fff; padding: 30px 20px 30px; position: relative; }
+.top::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 6px; background: linear-gradient(90deg, var(--teal), var(--cyan)); }
+.wrap { max-width: 1000px; margin: 0 auto; }
+.kick { font-size: .78rem; font-weight: 700; letter-spacing: .14em; color: var(--lteal); text-transform: uppercase; }
+h1 { font-size: clamp(1.7rem, 4.5vw, 2.5rem); margin: 6px 0 8px; line-height: 1.15; }
+.meta { color: #dfeef0; font-weight: 600; }
+main { padding: 0 20px; }
+.quick { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 14px; margin: 22px 0 6px; }
+.quick > a, .skillcard { display: block; text-decoration: none; background: #fff; border-radius: 14px; padding: 16px 18px; color: var(--ink); border-top: 5px solid var(--teal); box-shadow: 0 1px 2px rgba(0,30,50,.06), 0 4px 14px rgba(0,30,50,.07); }
+.quick > a:nth-child(2) { border-top-color: var(--cyan); } .quick > a:nth-child(3) { border-top-color: var(--navy); }
+.quick b { display: block; color: var(--navy); font-size: 1.05rem; }
+.quick span { font-size: .85rem; color: var(--muted); }
+section { background: #fff; border-radius: 16px; padding: 22px; margin: 18px 0; box-shadow: 0 1px 2px rgba(0,30,50,.06), 0 4px 14px rgba(0,30,50,.07); }
+h2 { color: var(--navy); font-size: 1.3rem; margin: 0 0 4px; display: flex; align-items: center; gap: 10px; }
+h2::before { content: ""; width: 6px; height: 22px; background: var(--teal); border-radius: 3px; }
+.lead { color: var(--muted); margin: 0 0 12px; font-size: .92rem; }
+ul.list { list-style: none; padding: 0; margin: 0; }
+ul.list li { display: grid; grid-template-columns: 70px 1fr auto; gap: 14px; align-items: center; padding: 12px 0; border-top: 1px solid var(--line); }
+ul.list li:first-child { border-top: 0; }
+.t { font-weight: 800; color: var(--cyan); }
+.info strong { display: block; color: var(--navy); }
+.info span { font-size: .85rem; color: var(--muted); }
+.acts { display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
+.btn { display: inline-flex; align-items: center; gap: 8px; text-decoration: none; font-weight: 700; font-size: .85rem; background: var(--navy); color: #fff; border-radius: 10px; padding: 9px 14px; border: 2px solid var(--navy); }
+.btn.ghost { background: #fff; color: var(--navy); }
+.btn:hover { background: var(--dteal); border-color: var(--dteal); color: #fff; }
+.sz { font-weight: 600; font-size: .72rem; opacity: .8; }
+.kind { font-size: .72rem; font-weight: 800; border-radius: 8px; padding: 6px 0; text-align: center; color: #fff; background: var(--navy); }
+.kind.word { background: var(--cyan); } .kind.png { background: var(--teal); }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+.cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 12px; margin-top: 14px; }
+.card-img { display: block; text-decoration: none; color: var(--navy); font-weight: 700; font-size: .85rem; background: var(--mint2); border-radius: 12px; padding: 8px; text-align: center; }
+.card-img img { width: 100%; height: auto; border-radius: 8px; display: block; margin-bottom: 6px; }
+.hd { } .top .wrap::after { content: ""; display: block; clear: both; }
+.share { margin-top: 6px; color: #dfeef0; font-size: .92rem; } .share a { color: #fff; font-weight: 700; }
+.qrbox { float: right; margin-left: 20px; background: #fff; border-radius: 12px; padding: 8px; text-align: center; text-decoration: none; color: var(--navy); font-size: .72rem; font-weight: 700; }
+.qrbox img { width: 96px; height: 96px; display: block; margin-bottom: 2px; }
+.skillcard { display: flex !important; gap: 14px; align-items: center; justify-content: space-between; }
+.skl { text-decoration: none; color: var(--ink); }
+.skl b { display: block; color: var(--navy); font-size: 1.05rem; } .skl span { display: block; font-size: .85rem; color: var(--muted); }
+.skl .url { color: var(--cyan); font-weight: 800; font-size: .95rem; margin-top: 6px; }
+.qrs { flex: none; text-align: center; text-decoration: none; color: var(--navy); font-size: .7rem; font-weight: 700; }
+.qrs img { width: 100px; height: 100px; display: block; border: 2px solid var(--navy); border-radius: 8px; margin-bottom: 3px; }
+@media (max-width: 760px) { .quick { grid-template-columns: 1fr; } }
+.note { background: var(--mint); border-radius: 12px; padding: 12px 16px; color: var(--dteal); font-weight: 600; font-size: .9rem; margin-top: 12px; }
+.logos { display: flex; align-items: center; justify-content: space-between; gap: 18px; flex-wrap: wrap; border-top: 1px solid var(--line); padding: 20px 0 30px; margin-top: 10px; }
+.logos img { height: 44px; width: auto; }
+@media (max-width: 640px) { ul.list li { grid-template-columns: 1fr; gap: 6px; } .acts { justify-content: flex-start; } .kind { justify-self: start; padding: 4px 10px; } }
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <a class="qrbox" href="qr-week1.png" target="_blank" rel="noopener"><img src="qr-week1.png" alt="QR code for this page, tinyurl.com/AU0009Week1"><span>Scan for this page</span></a>
+  <div class="kick">AU0009 AI Leadership, AI Strategy and Opportunity</div>
+  <h1>Week 1 resources</h1>
+  <div class="hd"><div><div class="meta">Induction and AI foundations, Wednesday 11 November 2026, 9:45 to 12:45, online via Microsoft Teams</div>
+  <div class="share">Share this page: <a href="https://tinyurl.com/AU0009Week1">tinyurl.com/AU0009Week1</a></div></div></div>
+</div></header>
+<main class="wrap">
+  <nav class="quick" aria-label="Quick links">
+    <div class="skillcard"><a class="skl" href="skills/"><b>Initial AI skills assessment</b><span>Complete it online, then print or download your results</span><span class="url">tinyurl.com/AU0009skills</span></a>
+      <a class="qrs" href="qr-skills.png" target="_blank" rel="noopener"><img src="qr-skills.png" alt="QR code for the initial AI skills assessment, tinyurl.com/AU0009skills"><span>Open QR code</span></a></div>
+    <a href="#slides"><b>Week 1 slides</b><span>Induction and Session 1, AI foundations</span></a>
+    <a href="#pack"><b>Learner pack</b><span>Activities and notes for Week 1</span></a>
+  </nav>
+
+  <section id="slides" aria-labelledby="h-slides"><h2 id="h-slides">Presentation</h2><p class="lead">View opens the slides in your browser. PowerPoint downloads the original file.</p><ul class="list">
+<li class="pres"><span class="t">9:45</span><div class="info"><strong>Week 1, induction and AI foundations</strong><span>Induction, then Session 1, AI foundations, after the break at 11:30</span></div>
+<div class="acts"><a class="btn" href="pdf/au0009-week-1-induction-and-ai-foundations.pdf" target="_blank" rel="noopener">View<span class="sr"> Week 1 slides as PDF</span></a><a class="btn ghost" href="files/au0009-week-1-induction-and-ai-foundations.pptx" download="AU0009 Week 1 Induction and AI Foundations.pptx">PowerPoint<span class="sz">5.5 MB</span></a></div></li>
+  </ul></section>
+
+  <section id="pack" aria-labelledby="h-pack"><h2 id="h-pack">Learner pack</h2><p class="lead">How we work on Teams, the icebreakers and your Week 1 activities.</p><ul class="list">
+<li class="doc"><span class="kind word">Word</span><div class="info"><strong>AU0009 Week 1 Learner Pack</strong><span>Download to fill in, or view it in your browser</span></div>
+<div class="acts"><a class="btn" href="pdf/au0009-week-1-learner-pack.pdf" target="_blank" rel="noopener">View<span class="sr"> learner pack as PDF</span></a><a class="btn ghost" href="files/au0009-week-1-learner-pack.docx" download="AU0009 Week 1 Learner Pack.docx">Word<span class="sz">42 KB</span></a></div></li>
+  </ul>
+  <p class="note">Do not enter personal or confidential organisational data into any AI tool unless your organisation has approved it.</p></section>
+
+  <div class="logos">
+    <img src="../assets/logos/logo_bfc_group.png" alt="B&amp;FC Group">
+    <img src="../assets/logos/logo_bfc_college.png" alt="Blackpool and The Fylde College">
+    <img src="../assets/logos/soc.png" alt="Blackpool School of Computing">
+  </div>
+</main>
+</body>
+</html>
